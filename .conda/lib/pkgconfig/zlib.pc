@@ -1,0 +1,13 @@
+prefix=/Users/xinzheng/Desktop/Desktop/SplitRoot2025/.conda
+exec_prefix=/Users/xinzheng/Desktop/Desktop/SplitRoot2025/.conda
+libdir=/Users/xinzheng/Desktop/Desktop/SplitRoot2025/.conda/lib
+sharedlibdir=/Users/xinzheng/Desktop/Desktop/SplitRoot2025/.conda/lib
+includedir=/Users/xinzheng/Desktop/Desktop/SplitRoot2025/.conda/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
