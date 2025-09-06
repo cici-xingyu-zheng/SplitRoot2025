@@ -1,0 +1,888 @@
+<rsml>
+<metadata>
+<version>1.4</version>
+<unit>pixel(um)</unit>
+<size>76.0</size>
+<last-modified>13-07-2025 12:13:50</last-modified>
+<software>RootSystemTracker</software>
+<user>Unknown</user>
+<file-key>61_graph_expertized</file-key>
+<observation-hours>0.0,7.0536,19.0482,31.0511,43.0484,55.05,67.0511,79.051,91.0511,103.0507,115.0495,127.0488,139.052,151.0503,163.0503,167.858</observation-hours>
+<image>
+<label>61_graph_expertized</label>
+<sha256>Nothing there</sha256>
+</image>
+</metadata>
+<scene>
+<plant ID="1" label="">
+<root ID="1.1" label="">
+<geometry>
+<polyline>
+<point coord_t="0.0" coord_th="0.0" coord_x="542.0" coord_y="248.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.0298" coord_th="0.0" coord_x="540.0" coord_y="254.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.0683" coord_th="0.0" coord_x="539.0" coord_y="261.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.0843" coord_th="0.0" coord_x="536.0" coord_y="262.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.1083" coord_th="0.0" coord_x="533.5" coord_y="266.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.1288" coord_th="0.0" coord_x="531.5" coord_y="270.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.1733" coord_th="0.0" coord_x="528.0" coord_y="278.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.2236" coord_th="0.0" coord_x="521.0" coord_y="285.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.3715" coord_th="0.0" coord_x="508.0" coord_y="311.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.5424" coord_th="0.0" coord_x="488.0" coord_y="338.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.754" coord_th="0.0" coord_x="469.0" coord_y="375.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.909" coord_th="0.0" coord_x="449.0" coord_y="398.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="1.0" coord_th="0.0" coord_x="441.0" coord_y="414.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="1.2212" coord_th="1.5601" coord_x="441.0" coord_y="420.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="1.4361" coord_th="3.0762" coord_x="444.0" coord_y="425.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="2.0" coord_th="7.0536" coord_x="447.0" coord_y="440.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="2.2642" coord_th="10.2228" coord_x="447.0" coord_y="446.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="2.5596" coord_th="13.7661" coord_x="450.0" coord_y="452.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="3.0" coord_th="19.0482" coord_x="450.0" coord_y="462.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="3.8405" coord_th="29.1369" coord_x="440.0" coord_y="482.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="4.0" coord_th="31.0511" coord_x="437.0" coord_y="485.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="4.3674" coord_th="35.4589" coord_x="426.0" coord_y="496.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="4.5786" coord_th="37.9932" coord_x="422.0" coord_y="504.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="4.7456" coord_th="39.9967" coord_x="421.0" coord_y="511.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.0" coord_th="43.0484" coord_x="417.0" coord_y="521.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.2068" coord_th="45.5303" coord_x="412.0" coord_y="533.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.3818" coord_th="47.6304" coord_x="412.0" coord_y="544.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.4885" coord_th="48.911" coord_x="415.0" coord_y="550.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.743" coord_th="51.9657" coord_x="415.0" coord_y="566.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.0" coord_th="55.05" coord_x="409.0" coord_y="581.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.0436" coord_th="55.573" coord_x="407.0" coord_y="583.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.4134" coord_th="60.0113" coord_x="407.0" coord_y="607.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.7029" coord_th="63.4857" coord_x="399.0" coord_y="624.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.8878" coord_th="65.7048" coord_x="399.0" coord_y="636.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.0" coord_th="67.0511" coord_x="401.0" coord_y="643.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.0636" coord_th="67.8145" coord_x="403.0" coord_y="648.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.2999" coord_th="70.6498" coord_x="403.0" coord_y="668.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.5491" coord_th="73.6404" coord_x="392.0" coord_y="686.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.621" coord_th="74.5027" coord_x="391.0" coord_y="692.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.7627" coord_th="76.2039" coord_x="391.0" coord_y="704.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.9055" coord_th="77.9169" coord_x="396.0" coord_y="715.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.0" coord_th="79.051" coord_x="396.0" coord_y="723.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.1768" coord_th="81.1727" coord_x="395.0" coord_y="736.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.2559" coord_th="82.1216" coord_x="392.0" coord_y="741.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.5949" coord_th="86.1898" coord_x="392.0" coord_y="766.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.7712" coord_th="88.3053" coord_x="397.0" coord_y="778.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.8119" coord_th="88.7934" coord_x="397.0" coord_y="781.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.8502" coord_th="89.2537" coord_x="399.0" coord_y="783.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="400.0" coord_y="794.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.1544" coord_th="92.9033" coord_x="398.0" coord_y="806.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.355" coord_th="95.3105" coord_x="389.0" coord_y="819.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.4233" coord_th="96.1304" coord_x="387.0" coord_y="824.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.6774" coord_th="99.1791" coord_x="386.0" coord_y="844.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.8706" coord_th="101.4981" coord_x="380.0" coord_y="858.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="378.0" coord_y="868.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.147" coord_th="104.8146" coord_x="377.0" coord_y="879.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.4148" coord_th="108.0284" coord_x="368.0" coord_y="897.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.6603" coord_th="110.973" coord_x="364.0" coord_y="915.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.8927" coord_th="113.762" coord_x="357.0" coord_y="931.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="356.0" coord_y="939.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.2574" coord_th="118.1384" coord_x="355.0" coord_y="961.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.3766" coord_th="119.5687" coord_x="353.0" coord_y="971.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.5403" coord_th="121.5323" coord_x="353.0" coord_y="985.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.8247" coord_th="124.9449" coord_x="349.0" coord_y="1009.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="349.0" coord_y="1024.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.2277" coord_th="129.7824" coord_x="352.0" coord_y="1041.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.6897" coord_th="135.3269" coord_x="351.0" coord_y="1076.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.8945" coord_th="137.7852" coord_x="355.0" coord_y="1091.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.9604" coord_th="138.577" coord_x="358.0" coord_y="1095.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="358.0" coord_y="1098.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0565" coord_th="139.7297" coord_x="360.0" coord_y="1102.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.2351" coord_th="141.8729" coord_x="362.0" coord_y="1116.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.4877" coord_th="144.9038" coord_x="362.0" coord_y="1136.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.5676" coord_th="145.8622" coord_x="360.0" coord_y="1142.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="356.0" coord_y="1176.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.3561" coord_th="155.324" coord_x="355.0" coord_y="1194.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.6873" coord_th="159.2979" coord_x="360.0" coord_y="1210.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.9441" coord_th="162.3798" coord_x="360.0" coord_y="1223.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="362.0" coord_y="1225.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+<root ID="1.1.1" label="">
+<geometry>
+<polyline>
+<point coord_t="2.0" coord_th="7.0536" coord_x="527.0" coord_y="271.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="3.0" coord_th="19.0482" coord_x="526.0" coord_y="271.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="4.0" coord_th="31.0511" coord_x="525.0" coord_y="272.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.0" coord_th="43.0484" coord_x="518.0" coord_y="280.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.0" coord_th="55.05" coord_x="509.0" coord_y="291.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.7579" coord_th="64.1456" coord_x="502.0" coord_y="298.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.0" coord_th="67.0511" coord_x="501.0" coord_y="301.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.1988" coord_th="69.4362" coord_x="499.0" coord_y="303.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.0" coord_th="79.051" coord_x="496.0" coord_y="314.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="494.0" coord_y="323.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="494.5" coord_y="334.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="501.5" coord_y="342.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="504.5" coord_y="351.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="512.0" coord_y="357.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="516.0" coord_y="362.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="521.0" coord_y="368.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="522.5" coord_y="371.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.2" label="">
+<geometry>
+<polyline>
+<point coord_t="3.0" coord_th="19.0482" coord_x="517.0" coord_y="298.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="4.0" coord_th="31.0511" coord_x="518.0" coord_y="299.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="4.4925" coord_th="36.9599" coord_x="522.0" coord_y="303.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.0" coord_th="43.0484" coord_x="524.0" coord_y="308.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.4951" coord_th="48.9902" coord_x="528.0" coord_y="315.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.0" coord_th="55.05" coord_x="526.0" coord_y="323.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.5673" coord_th="61.8577" coord_x="525.0" coord_y="330.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.0" coord_th="67.0511" coord_x="521.0" coord_y="334.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.3423" coord_th="71.1584" coord_x="520.0" coord_y="338.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.0" coord_th="79.051" coord_x="515.0339" coord_y="344.8761" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="507.4836" coord_y="355.3305" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.064" coord_th="91.8193" coord_x="507.0" coord_y="356.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="502.0" coord_y="366.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="496.0" coord_y="376.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="491.0" coord_y="383.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="491.0" coord_y="389.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="490.0" coord_y="396.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="489.0" coord_y="402.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.3" label="">
+<geometry>
+<polyline>
+<point coord_t="3.0" coord_th="19.0482" coord_x="508.0" coord_y="313.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="4.0" coord_th="31.0511" coord_x="509.0" coord_y="314.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="4.7202" coord_th="39.6915" coord_x="511.0" coord_y="321.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.0" coord_th="43.0484" coord_x="513.0" coord_y="323.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.0" coord_th="55.05" coord_x="518.0" coord_y="338.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.1841" coord_th="57.2595" coord_x="520.0" coord_y="340.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.7089" coord_th="63.5576" coord_x="521.0" coord_y="348.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.0" coord_th="67.0511" coord_x="523.0" coord_y="352.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.0" coord_th="79.051" coord_x="526.0" coord_y="368.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.6172" coord_th="86.4577" coord_x="527.0" coord_y="376.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="530.0" coord_y="380.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="533.0" coord_y="391.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="536.0" coord_y="401.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.2811" coord_th="118.4229" coord_x="538.0" coord_y="404.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="540.0" coord_y="413.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="544.0" coord_y="420.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="547.0" coord_y="429.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="548.5" coord_y="432.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="548.5" coord_y="434.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.4" label="">
+<geometry>
+<polyline>
+<point coord_t="3.0" coord_th="19.0482" coord_x="490.0" coord_y="330.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="4.0" coord_th="31.0511" coord_x="488.5" coord_y="331.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.0" coord_th="43.0484" coord_x="487.0" coord_y="333.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.0" coord_th="55.05" coord_x="484.0" coord_y="340.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.0" coord_th="67.0511" coord_x="479.0" coord_y="348.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.0" coord_th="79.051" coord_x="474.0" coord_y="359.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="470.0" coord_y="366.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="465.0" coord_y="375.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.3204" coord_th="106.8952" coord_x="465.0" coord_y="377.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="462.0" coord_y="380.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="456.0" coord_y="386.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="452.0" coord_y="391.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="448.0" coord_y="396.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="446.0" coord_y="400.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.5" label="">
+<geometry>
+<polyline>
+<point coord_t="4.0" coord_th="31.0511" coord_x="493.0" coord_y="336.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.0" coord_th="43.0484" coord_x="494.0" coord_y="337.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.0" coord_th="55.05" coord_x="502.0" coord_y="346.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.4323" coord_th="60.2384" coord_x="504.0" coord_y="351.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.0" coord_th="67.0511" coord_x="509.0" coord_y="356.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.4756" coord_th="72.7578" coord_x="511.0" coord_y="360.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.0" coord_th="79.051" coord_x="514.4872" coord_y="363.4873" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.4035" coord_th="83.8932" coord_x="519.0" coord_y="368.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="524.0" coord_y="376.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="530.0" coord_y="383.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="534.0" coord_y="394.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="536.5" coord_y="404.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.3568" coord_th="131.3314" coord_x="537.5" coord_y="406.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="539.5" coord_y="410.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="537.5" coord_y="412.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="537.0" coord_y="415.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="538.0" coord_y="416.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.6" label="">
+<geometry>
+<polyline>
+<point coord_t="5.0" coord_th="43.0484" coord_x="481.0" coord_y="357.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.214" coord_th="45.6169" coord_x="484.5" coord_y="360.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.387" coord_th="47.6925" coord_x="484.5" coord_y="364.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.6031" coord_th="50.287" coord_x="484.5" coord_y="369.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.7774" coord_th="52.3788" coord_x="485.0" coord_y="373.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.0" coord_th="55.05" coord_x="487.5" coord_y="378.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.4329" coord_th="60.2449" coord_x="490.0" coord_y="384.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.0" coord_th="67.0511" coord_x="488.5" coord_y="393.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.0" coord_th="79.051" coord_x="487.5" coord_y="415.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="493.5" coord_y="428.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="498.0" coord_y="450.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="497.0" coord_y="465.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="498.0" coord_y="481.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="500.5" coord_y="493.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="502.5" coord_y="508.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="502.5" coord_y="516.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="503.0" coord_y="525.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.7" label="">
+<geometry>
+<polyline>
+<point coord_t="5.0" coord_th="43.0484" coord_x="466.0" coord_y="383.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.5101" coord_th="49.1706" coord_x="472.0" coord_y="386.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.0" coord_th="55.05" coord_x="473.5" coord_y="393.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.0" coord_th="67.0511" coord_x="480.5" coord_y="408.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.3509" coord_th="71.262" coord_x="482.5" coord_y="416.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.5935" coord_th="74.1731" coord_x="486.0" coord_y="420.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.0" coord_th="79.051" coord_x="493.0" coord_y="427.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="497.5" coord_y="444.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="497.5" coord_y="460.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="496.5" coord_y="474.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="500.0" coord_y="490.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="501.0" coord_y="500.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="505.0" coord_y="519.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="503.0" coord_y="525.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="500.5" coord_y="532.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.8" label="">
+<geometry>
+<polyline>
+<point coord_t="6.0" coord_th="55.05" coord_x="435.0" coord_y="419.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.0" coord_th="67.0511" coord_x="433.0" coord_y="421.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.6008" coord_th="74.2603" coord_x="426.0" coord_y="429.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.0" coord_th="79.051" coord_x="423.0" coord_y="435.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="418.0" coord_y="449.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.4798" coord_th="96.8084" coord_x="416.0" coord_y="458.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.6178" coord_th="98.465" coord_x="414.0" coord_y="460.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="412.0" coord_y="467.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.1716" coord_th="105.1095" coord_x="412.0" coord_y="470.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.6903" coord_th="111.334" coord_x="407.0" coord_y="477.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="406.0" coord_y="482.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="399.0" coord_y="503.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.6306" coord_th="134.6179" coord_x="395.0" coord_y="514.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="394.0" coord_y="521.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.3445" coord_th="143.1848" coord_x="392.0" coord_y="528.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.4689" coord_th="144.6779" coord_x="390.0" coord_y="530.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.6009" coord_th="146.2617" coord_x="390.0" coord_y="533.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="385.0" coord_y="540.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.1204" coord_th="152.4954" coord_x="383.0" coord_y="542.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.6065" coord_th="158.3278" coord_x="382.0" coord_y="553.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="379.0" coord_y="561.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="378.0" coord_y="571.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.9" label="">
+<geometry>
+<polyline>
+<point coord_t="8.0" coord_th="79.051" coord_x="453.0" coord_y="463.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="455.0" coord_y="464.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="457.0" coord_y="466.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="462.0" coord_y="470.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="468.0" coord_y="476.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="472.0" coord_y="481.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="477.0" coord_y="488.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="481.0" coord_y="492.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="482.0" coord_y="494.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.10" label="">
+<geometry>
+<polyline>
+<point coord_t="11.0" coord_th="115.0495" coord_x="419.0" coord_y="506.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="417.0" coord_y="506.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="413.0" coord_y="507.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="409.0" coord_y="509.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="407.0" coord_y="511.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="406.0" coord_y="512.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.11" label="">
+<geometry>
+<polyline>
+<point coord_t="10.0" coord_th="103.0507" coord_x="421.0" coord_y="516.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="421.3333" coord_y="516.3333" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="421.6667" coord_y="516.6666" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="422.0" coord_y="517.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="423.0" coord_y="517.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="424.0" coord_y="518.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="425.0" coord_y="519.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.12" label="">
+<geometry>
+<polyline>
+<point coord_t="10.0" coord_th="103.0507" coord_x="409.0" coord_y="539.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="408.0" coord_y="540.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="407.0" coord_y="541.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="404.0" coord_y="544.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="399.0" coord_y="550.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="394.0" coord_y="556.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="391.0" coord_y="559.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.13" label="">
+<geometry>
+<polyline>
+<point coord_t="11.0" coord_th="115.0495" coord_x="405.0" coord_y="586.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="404.0" coord_y="587.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="397.0" coord_y="591.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.3627" coord_th="143.4035" coord_x="393.0" coord_y="593.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="387.0" coord_y="599.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.3398" coord_th="155.1278" coord_x="384.0" coord_y="602.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="377.0" coord_y="605.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="372.0" coord_y="609.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.14" label="">
+<geometry>
+<polyline>
+<point coord_t="11.0" coord_th="115.0495" coord_x="409.0" coord_y="605.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="411.5" coord_y="606.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="414.0" coord_y="608.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="421.0" coord_y="619.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="431.0" coord_y="626.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="434.0" coord_y="630.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.15" label="">
+<geometry>
+<polyline>
+<point coord_t="14.0" coord_th="151.0503" coord_x="396.0" coord_y="626.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="395.0" coord_y="626.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="394.0" coord_y="627.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.16" label="">
+<geometry>
+<polyline>
+<point coord_t="11.0" coord_th="115.0495" coord_x="405.0" coord_y="666.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="406.5" coord_y="667.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="408.0" coord_y="668.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.5481" coord_th="145.6288" coord_x="413.0" coord_y="673.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="415.0" coord_y="678.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.6824" coord_th="159.2391" coord_x="421.0" coord_y="685.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="422.0" coord_y="689.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="423.0" coord_y="695.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.17" label="">
+<geometry>
+<polyline>
+<point coord_t="12.0" coord_th="127.0488" coord_x="389.0" coord_y="703.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="389.0" coord_y="704.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="387.0" coord_y="708.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="380.0" coord_y="718.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="376.0" coord_y="722.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.18" label="">
+<geometry>
+<polyline>
+<point coord_t="13.0" coord_th="139.052" coord_x="398.0" coord_y="728.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="399.0" coord_y="729.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="404.0" coord_y="737.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="406.0" coord_y="744.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.19" label="">
+<geometry>
+<polyline>
+<point coord_t="14.0" coord_th="151.0503" coord_x="390.0" coord_y="739.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="387.0" coord_y="740.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="384.0" coord_y="741.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.20" label="">
+<geometry>
+<polyline>
+<point coord_t="14.0" coord_th="151.0503" coord_x="391.0" coord_y="769.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="389.0" coord_y="770.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="386.0" coord_y="773.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.21" label="">
+<geometry>
+<polyline>
+<point coord_t="14.0" coord_th="151.0503" coord_x="402.0" coord_y="787.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="402.5" coord_y="786.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="403.0" coord_y="786.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="1.1.22" label="">
+<geometry>
+<polyline>
+<point coord_t="15.0" coord_th="163.0503" coord_x="401.5" coord_y="798.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="405.0" coord_y="800.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+</root>
+</plant>
+<plant ID="2" label="">
+<root ID="2.1" label="">
+<geometry>
+<polyline>
+<point coord_t="0.0" coord_th="0.0" coord_x="592.0" coord_y="247.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.0581" coord_th="0.0" coord_x="593.5" coord_y="258.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.1256" coord_th="0.0" coord_x="598.0" coord_y="269.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.1746" coord_th="0.0" coord_x="602.0" coord_y="277.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.2493" coord_th="0.0" coord_x="607.5" coord_y="290.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.2971" coord_th="0.0" coord_x="609.5" coord_y="298.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.3869" coord_th="0.0" coord_x="619.5" coord_y="311.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.4718" coord_th="0.0" coord_x="625.0" coord_y="326.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.5257" coord_th="0.0" coord_x="629.0" coord_y="335.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.5872" coord_th="0.0" coord_x="635.0" coord_y="344.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.6731" coord_th="0.0" coord_x="641.0" coord_y="359.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.7367" coord_th="0.0" coord_x="646.0" coord_y="369.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.804" coord_th="0.0" coord_x="651.5" coord_y="380.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.8754" coord_th="0.0" coord_x="658.5" coord_y="391.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="0.94" coord_th="0.0" coord_x="665.5" coord_y="401.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="1.0" coord_th="0.0" coord_x="670.0" coord_y="411.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="2.0" coord_th="7.0536" coord_x="671.5" coord_y="425.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="2.2116" coord_th="9.5912" coord_x="669.5" coord_y="431.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="2.4296" coord_th="12.2069" coord_x="666.0" coord_y="436.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="2.6317" coord_th="14.6309" coord_x="663.5" coord_y="442.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="2.8561" coord_th="17.3224" coord_x="666.5" coord_y="448.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="3.0" coord_th="19.0482" coord_x="670.0" coord_y="450.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="3.1258" coord_th="20.5582" coord_x="674.5" coord_y="448.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="3.3075" coord_th="22.7386" coord_x="681.5" coord_y="445.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="3.5108" coord_th="25.1797" coord_x="688.5" coord_y="450.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="3.7627" coord_th="28.2033" coord_x="692.5" coord_y="459.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="4.0" coord_th="31.0511" coord_x="698.0" coord_y="467.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="4.1787" coord_th="33.1951" coord_x="699.5" coord_y="478.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="4.3145" coord_th="34.8247" coord_x="698.5" coord_y="486.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="4.5298" coord_th="37.4074" coord_x="692.0" coord_y="497.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="4.7035" coord_th="39.491" coord_x="685.5" coord_y="505.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="4.856" coord_th="41.3214" coord_x="684.5" coord_y="514.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.0" coord_th="43.0484" coord_x="681.5" coord_y="522.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.1049" coord_th="44.3072" coord_x="680.5" coord_y="529.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.2841" coord_th="46.4583" coord_x="675.5" coord_y="540.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.4775" coord_th="48.7795" coord_x="674.5" coord_y="553.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.5751" coord_th="49.9503" coord_x="675.5" coord_y="559.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.7922" coord_th="52.5561" coord_x="673.5" coord_y="574.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.0" coord_th="55.05" coord_x="673.0" coord_y="588.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.1024" coord_th="56.2792" coord_x="671.5" coord_y="596.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.2477" coord_th="58.0224" coord_x="675.0" coord_y="607.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.3698" coord_th="59.4884" coord_x="677.0" coord_y="616.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.5276" coord_th="61.3821" coord_x="676.0" coord_y="629.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.7088" coord_th="63.5561" coord_x="671.0" coord_y="642.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.8485" coord_th="65.2327" coord_x="662.0" coord_y="649.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.0" coord_th="67.0511" coord_x="653.0" coord_y="657.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.0769" coord_th="67.9742" coord_x="648.5" coord_y="662.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.2122" coord_th="69.598" coord_x="648.5" coord_y="675.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.3539" coord_th="71.298" coord_x="650.0" coord_y="688.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.4839" coord_th="72.8582" coord_x="650.5" coord_y="700.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.589" coord_th="74.1193" coord_x="648.5" coord_y="709.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.7077" coord_th="75.5438" coord_x="644.0" coord_y="719.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.8104" coord_th="76.7762" coord_x="641.0" coord_y="728.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.8858" coord_th="77.6808" coord_x="638.5" coord_y="735.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.0" coord_th="79.051" coord_x="639.5" coord_y="745.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.1554" coord_th="80.9162" coord_x="641.5" coord_y="757.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.396" coord_th="83.8035" coord_x="637.0" coord_y="774.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.6453" coord_th="86.795" coord_x="626.5" coord_y="790.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.8678" coord_th="89.4652" coord_x="613.5" coord_y="800.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="606.0" coord_y="807.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0809" coord_th="92.0224" coord_x="602.0" coord_y="811.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.1364" coord_th="92.6876" coord_x="601.0" coord_y="815.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.3919" coord_th="95.754" coord_x="601.5" coord_y="834.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.7023" coord_th="99.4786" coord_x="603.5" coord_y="857.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="601.0" coord_y="879.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="598.5" coord_y="934.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="601.5" coord_y="1032.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="600.0" coord_y="1071.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="585.0" coord_y="1193.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="581.0" coord_y="1220.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="579.5" coord_y="1225.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+<root ID="2.1.1" label="">
+<geometry>
+<polyline>
+<point coord_t="4.0" coord_th="31.0511" coord_x="629.0" coord_y="327.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.0" coord_th="43.0484" coord_x="632.5" coord_y="329.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.0" coord_th="55.05" coord_x="635.5" coord_y="338.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.0" coord_th="67.0511" coord_x="639.0" coord_y="347.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.0" coord_th="79.051" coord_x="646.0" coord_y="367.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="658.0" coord_y="384.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="667.0" coord_y="403.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="672.0" coord_y="414.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="678.0" coord_y="422.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="680.0" coord_y="427.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="681.5" coord_y="440.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="684.0" coord_y="449.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="685.0" coord_y="453.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.2" label="">
+<geometry>
+<polyline>
+<point coord_t="4.0" coord_th="31.0511" coord_x="637.0" coord_y="341.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.0" coord_th="43.0484" coord_x="642.0" coord_y="344.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.0" coord_th="55.05" coord_x="648.5" coord_y="355.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.0" coord_th="67.0511" coord_x="656.0" coord_y="371.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.0" coord_th="79.051" coord_x="661.0" coord_y="386.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.2017" coord_th="81.4719" coord_x="663.5" coord_y="392.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.5909" coord_th="86.1424" coord_x="662.5" coord_y="404.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.8131" coord_th="88.8087" coord_x="661.0" coord_y="411.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="660.5" coord_y="417.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.2956" coord_th="94.5987" coord_x="660.5" coord_y="425.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.5181" coord_th="97.2687" coord_x="661.0" coord_y="431.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.7775" coord_th="100.3808" coord_x="661.5" coord_y="438.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="661.0" coord_y="444.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.3159" coord_th="106.8408" coord_x="662.5" coord_y="451.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.6935" coord_th="111.372" coord_x="661.5" coord_y="460.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="658.0" coord_y="466.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.2699" coord_th="118.2883" coord_x="658.0" coord_y="471.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.4894" coord_th="120.9219" coord_x="656.0" coord_y="475.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="650.0" coord_y="484.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="642.5" coord_y="502.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="634.0" coord_y="516.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="622.5" coord_y="532.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="615.0" coord_y="541.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.3" label="">
+<geometry>
+<polyline>
+<point coord_t="4.0" coord_th="31.0511" coord_x="643.0" coord_y="352.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="5.0" coord_th="43.0484" coord_x="647.0" coord_y="356.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="6.0" coord_th="55.05" coord_x="655.0" coord_y="368.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="7.0" coord_th="67.0511" coord_x="659.5" coord_y="386.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.0" coord_th="79.051" coord_x="668.0" coord_y="402.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="680.5" coord_y="428.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.3032" coord_th="94.689" coord_x="681.5" coord_y="435.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.6489" coord_th="98.8378" coord_x="681.5" coord_y="442.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="684.5" coord_y="449.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="678.5" coord_y="469.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.3428" coord_th="119.1624" coord_x="678.0" coord_y="477.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.6399" coord_th="122.7284" coord_x="674.5" coord_y="484.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="670.5" coord_y="492.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.2516" coord_th="130.0693" coord_x="669.5" coord_y="497.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.5141" coord_th="133.22" coord_x="664.5" coord_y="500.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.7565" coord_th="136.1297" coord_x="659.5" coord_y="502.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="656.5" coord_y="507.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.1965" coord_th="141.4091" coord_x="653.5" coord_y="511.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.5071" coord_th="145.136" coord_x="649.0" coord_y="517.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.8416" coord_th="149.1499" coord_x="642.5" coord_y="523.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="640.5" coord_y="526.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.2957" coord_th="154.5988" coord_x="638.0" coord_y="531.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.5818" coord_th="158.0319" coord_x="635.0" coord_y="536.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="632.5" coord_y="543.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="627.0" coord_y="551.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.4" label="">
+<geometry>
+<polyline>
+<point coord_t="7.0" coord_th="67.0511" coord_x="663.0" coord_y="398.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="8.0" coord_th="79.051" coord_x="658.5" coord_y="402.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="652.0" coord_y="409.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="643.0" coord_y="416.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="634.0" coord_y="422.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="626.0" coord_y="427.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="618.5" coord_y="436.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="616.0" coord_y="444.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="611.5" coord_y="452.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="611.0" coord_y="457.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.5" label="">
+<geometry>
+<polyline>
+<point coord_t="8.0" coord_th="79.051" coord_x="683.5" coord_y="445.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="688.0" coord_y="443.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="693.0" coord_y="451.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="702.5" coord_y="459.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.4458" coord_th="120.399" coord_x="708.5" coord_y="464.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.7089" coord_th="123.5563" coord_x="711.5" coord_y="468.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="712.5" coord_y="473.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.4113" coord_th="131.9862" coord_x="713.0" coord_y="479.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.8008" coord_th="136.6612" coord_x="716.5" coord_y="483.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="718.0" coord_y="486.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="722.0" coord_y="497.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="718.5" coord_y="512.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="710.5" coord_y="524.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.6" label="">
+<geometry>
+<polyline>
+<point coord_t="8.0" coord_th="79.051" coord_x="669.5" coord_y="451.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="9.0" coord_th="91.0511" coord_x="663.5" coord_y="461.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="655.5" coord_y="481.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="647.0" coord_y="496.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="634.0" coord_y="514.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="624.5" coord_y="524.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="615.0" coord_y="541.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="606.0" coord_y="553.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="602.0" coord_y="561.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.7" label="">
+<geometry>
+<polyline>
+<point coord_t="11.0" coord_th="115.0495" coord_x="698.0" coord_y="461.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="702.0" coord_y="463.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="708.0" coord_y="468.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="714.0" coord_y="475.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="721.0" coord_y="483.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="722.0" coord_y="485.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.8" label="">
+<geometry>
+<polyline>
+<point coord_t="9.0" coord_th="91.0511" coord_x="702.0" coord_y="473.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="10.0" coord_th="103.0507" coord_x="706.5" coord_y="475.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="711.0" coord_y="480.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="717.5" coord_y="489.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="721.5" coord_y="505.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="717.0" coord_y="522.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="711.5" coord_y="536.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="710.5" coord_y="542.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.9" label="">
+<geometry>
+<polyline>
+<point coord_t="10.0" coord_th="103.0507" coord_x="695.0" coord_y="494.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="701.5" coord_y="503.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="699.5" coord_y="517.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="695.0" coord_y="531.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="690.0" coord_y="548.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="683.0" coord_y="564.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="679.5" coord_y="571.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.10" label="">
+<geometry>
+<polyline>
+<point coord_t="10.0" coord_th="103.0507" coord_x="684.0" coord_y="505.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="677.5" coord_y="507.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="671.0" coord_y="514.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="659.0" coord_y="523.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.2365" coord_th="141.8894" coord_x="656.0" coord_y="526.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.6508" coord_th="146.8604" coord_x="651.0" coord_y="532.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="645.5" coord_y="535.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="635.5" coord_y="543.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="626.5" coord_y="551.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.11" label="">
+<geometry>
+<polyline>
+<point coord_t="10.0" coord_th="103.0507" coord_x="679.5" coord_y="538.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="11.0" coord_th="115.0495" coord_x="681.5" coord_y="538.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="687.0" coord_y="546.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.4538" coord_th="132.4962" coord_x="688.5" coord_y="552.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.7195" coord_th="135.6851" coord_x="691.5" coord_y="555.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="695.5" coord_y="556.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="701.0" coord_y="570.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="707.5" coord_y="580.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="711.5" coord_y="586.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.12" label="">
+<geometry>
+<polyline>
+<point coord_t="11.0" coord_th="115.0495" coord_x="672.5" coord_y="551.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="668.5" coord_y="555.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="657.5" coord_y="565.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.2057" coord_th="141.5195" coord_x="655.0" coord_y="568.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.4856" coord_th="144.878" coord_x="651.5" coord_y="572.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.8398" coord_th="149.1285" coord_x="646.5" coord_y="577.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="647.0" coord_y="580.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="638.5" coord_y="592.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="633.5" coord_y="600.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.13" label="">
+<geometry>
+<polyline>
+<point coord_t="11.0" coord_th="115.0495" coord_x="676.5" coord_y="571.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="682.0" coord_y="574.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="687.0" coord_y="587.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="693.0" coord_y="606.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="694.5" coord_y="622.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="693.5" coord_y="630.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.14" label="">
+<geometry>
+<polyline>
+<point coord_t="11.0" coord_th="115.0495" coord_x="668.5" coord_y="594.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="662.0" coord_y="598.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="649.5" coord_y="607.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.3427" coord_th="143.1633" coord_x="644.0" coord_y="612.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.7392" coord_th="147.9214" coord_x="637.0" coord_y="617.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="633.0" coord_y="621.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.2084" coord_th="153.5515" coord_x="629.0" coord_y="622.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.517" coord_th="157.2543" coord_x="627.0" coord_y="628.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="620.0" coord_y="635.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="615.5" coord_y="644.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.15" label="">
+<geometry>
+<polyline>
+<point coord_t="11.0" coord_th="115.0495" coord_x="679.0" coord_y="620.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.0" coord_th="127.0488" coord_x="680.5" coord_y="619.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.3758" coord_th="131.5594" coord_x="685.0" coord_y="621.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="12.6263" coord_th="134.5665" coord_x="688.0" coord_y="622.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="690.5" coord_y="626.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.1729" coord_th="141.1261" coord_x="692.0" coord_y="629.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.6543" coord_th="146.9021" coord_x="694.5" coord_y="638.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="697.5" coord_y="644.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.3873" coord_th="155.6981" coord_x="697.5" coord_y="651.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.7986" coord_th="160.6334" coord_x="702.5" coord_y="656.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="706.0" coord_y="657.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="708.0" coord_y="668.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.16" label="">
+<geometry>
+<polyline>
+<point coord_t="12.0" coord_th="127.0488" coord_x="673.5" coord_y="644.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="677.0" coord_y="650.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.2759" coord_th="142.3624" coord_x="676.0" coord_y="656.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.5481" coord_th="145.6278" coord_x="676.0" coord_y="662.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.7848" coord_th="148.4688" coord_x="677.5" coord_y="667.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="676.0" coord_y="672.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.3393" coord_th="155.122" coord_x="675.5" coord_y="678.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.5288" coord_th="157.3955" coord_x="674.5" coord_y="682.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.8334" coord_th="161.0507" coord_x="676.5" coord_y="687.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="678.5" coord_y="690.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="680.5" coord_y="699.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.17" label="">
+<geometry>
+<polyline>
+<point coord_t="12.0" coord_th="127.0488" coord_x="650.5" coord_y="661.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="645.5" coord_y="660.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="635.0" coord_y="673.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="623.0" coord_y="683.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="619.0" coord_y="691.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.18" label="">
+<geometry>
+<polyline>
+<point coord_t="12.0" coord_th="127.0488" coord_x="646.5" coord_y="678.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="643.0" coord_y="678.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="634.0" coord_y="687.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="622.5" coord_y="695.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="618.5" coord_y="704.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.19" label="">
+<geometry>
+<polyline>
+<point coord_t="12.0" coord_th="127.0488" coord_x="651.0" coord_y="709.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.0" coord_th="139.052" coord_x="655.5" coord_y="712.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.4312" coord_th="144.2256" coord_x="658.5" coord_y="721.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="13.677" coord_th="147.1749" coord_x="661.5" coord_y="725.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="666.0" coord_y="731.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="678.5" coord_y="747.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="679.0" coord_y="756.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.20" label="">
+<geometry>
+<polyline>
+<point coord_t="13.0" coord_th="139.052" coord_x="637.0" coord_y="742.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="628.5" coord_y="745.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="617.5" coord_y="752.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="610.5" coord_y="760.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.21" label="">
+<geometry>
+<polyline>
+<point coord_t="13.0" coord_th="139.052" coord_x="641.0" coord_y="769.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="14.0" coord_th="151.0503" coord_x="647.5" coord_y="773.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="656.0" coord_y="787.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="660.5" coord_y="795.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.22" label="">
+<geometry>
+<polyline>
+<point coord_t="14.0" coord_th="151.0503" coord_x="623.5" coord_y="792.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="628.0" coord_y="796.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="631.0" coord_y="804.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.23" label="">
+<geometry>
+<polyline>
+<point coord_t="14.0" coord_th="151.0503" coord_x="600.0" coord_y="818.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.0" coord_th="163.0503" coord_x="590.5" coord_y="823.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.255" coord_th="164.2765" coord_x="587.0" coord_y="824.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="15.7264" coord_th="166.5425" coord_x="582.0" coord_y="829.0" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="579.0" coord_y="831.5" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+<root ID="2.1.24" label="">
+<geometry>
+<polyline>
+<point coord_t="15.0" coord_th="163.0503" coord_x="604.0" coord_y="851.5" diameter="0.0" vx="0.0" vy="0.0"/>
+<point coord_t="16.0" coord_th="167.858" coord_x="605.5" coord_y="854.0" diameter="0.0" vx="0.0" vy="0.0"/>
+</polyline>
+</geometry>
+</root>
+</root>
+</plant>
+</scene>
+</rsml>
