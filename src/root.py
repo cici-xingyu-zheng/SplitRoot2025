@@ -6,8 +6,10 @@ from math import sqrt, atan2, pi
 import scipy as sp
 
 np.random.seed(19680801)
+
 interval = 6
-# Now given that the time interval is variable, we use coord_th instead. 
+# Now given that the time interval is variable, we use coord_th instead;
+# When coord_th has issues, we use coord_t to correct for it.
 # We need to reasign it.
 
 class Node:
@@ -102,7 +104,6 @@ class Branch:
                                 time = time,
                                 hr = float(n['@coord_th'])
                                 ) 
-
                     self.nodes.append(node)
             self.set_data()
 
@@ -140,7 +141,8 @@ class Branch:
 
     def set_appiration(self) -> None:
         '''Set appiration attribute of branch.'''
-        self.appiration = min(self.nodes, key=lambda x: x.time).time
+        # self.appiration = min(self.nodes, key=lambda x: x.time).time
+        self.appiration = min(self.nodes, key=lambda x: x.hr).hr
 
     def set_lengths(self) -> None:
         '''Set length attribute of each node.'''
@@ -157,10 +159,11 @@ class Branch:
         for i in range(1, len(self.tips)):
             prev = self.tips[i-1]
             curr = self.tips[i]
-            if prev.time == curr.time:
+            if prev.hr == curr.hr:
                 curr.speed = None
             else:
-                curr.speed = (curr.length - prev.length) / (curr.time - prev.time)
+                curr.speed = (curr.length - prev.length) / (curr.hr - prev.hr)
+
             
     def set_angles(self) -> None:
         '''Set angle attribute of each node except first.'''
@@ -238,114 +241,90 @@ class Root:
         return "\n".join(s)
 
 
-def splitrsml2root(file, pixel_size_mm=79/1000):
+def splitrsml2root(file, pixel_size_mm=79/1000, verbose=False):
     """
     Given an RSML of a split root system converts to two Root objects and a dictionary
     version of the RSML.
-    
-    args:
-        file            : string, RSML file path/name in the local directory
-        pxl_size_mm  : float, scale factor, real length of pixel in microns
-        
-    --------
-    OUTPUT: 
-        left_rsa  : Root object for the left primary root of RSML+t Hirros pipeline output. 
-        right_rsa : Root object for the right primary root of RSML+t Hirros pipeline output.
-        RSA_dict  : python dict, the dictionary version of the RSML file.
+
+    New:
+        verbose : bool
+            If True, prints diagnostics during hr correction. If False, silences them.
     """
+    _p = print if verbose else (lambda *a, **k: None)  # local printer
 
     # convert xml to dict:
-    with open(file, 'r', encoding='utf-8') as file:
-        rsml = file.read()
-
+    with open(file, 'r', encoding='utf-8') as fileobj:
+        rsml = fileobj.read()
     RSA_dict = xmltodict.parse(rsml)
-    
-    if  RSA_dict['rsml']['scene']['plant'][0]['root']['geometry']['polyline']['point'][0]['@coord_x'] < RSA_dict['rsml']['scene']['plant'][1]['root']['geometry']['polyline']['point'][0]['@coord_x']:       
-        # read left:
+
+    if  RSA_dict['rsml']['scene']['plant'][0]['root']['geometry']['polyline']['point'][0]['@coord_x'] < RSA_dict['rsml']['scene']['plant'][1]['root']['geometry']['polyline']['point'][0]['@coord_x']:
         left = RSA_dict['rsml']['scene']['plant'][0]
-        # read right:
         right = RSA_dict['rsml']['scene']['plant'][1]
     else:
-         # read right:
         right = RSA_dict['rsml']['scene']['plant'][0]
-        # read left:
-        left = RSA_dict['rsml']['scene']['plant'][1]
+        left  = RSA_dict['rsml']['scene']['plant'][1]
 
     def get_root(side):
-        # primary root:
         primary_dict = side['root']['geometry']['polyline']['point']
         primary = Branch(primary_dict, pixel_size_mm)
 
-        # lateral roots:
         laterals = []
         if 'root' in side['root']:
             if isinstance(side['root']['root'], list):
                 for lr in side['root']['root']:
                     lateral_dict = lr['geometry']['polyline']['point']
-                    if type(lateral_dict) == dict:
+                    if isinstance(lateral_dict, dict):
                         lateral_dict = [lateral_dict]
                     laterals.append(Branch(lateral_dict, pixel_size_mm))
             else:
                 lr = side['root']['root']
                 lateral_dict = lr['geometry']['polyline']['point']
-                if type(lateral_dict) == dict:
+                if isinstance(lateral_dict, dict):
                     lateral_dict = [lateral_dict]
                 laterals.append(Branch(lateral_dict, pixel_size_mm))
 
         return Root(primary, laterals)
-        
-    left_rsa = get_root(left)
-    right_rsa = get_root(right)
-    if left_rsa.laterals:
-        # Correct for the wrongly assigned hr=0 but time!=0 issue:
-        for lr in left_rsa.laterals:
-            hr_values = [node.hr for node in lr.nodes]
-            time_values = [node.time for node in lr.nodes]
-            
-            # Check if first entry has hr=0 but time!=0
-            if hr_values and time_values and len(hr_values) > 1 and len(time_values) > 1:
-                if hr_values[0] == 0 and time_values[0] != 0:
-                    print(f"FOUND: First node has hr=0 but time={time_values[0]}")
-                    print(f"Original hr values: {hr_values}")
-                    print(f"Time values: {time_values}")
-                    
-                    # Calculate corrected hr value for first node
-                    hr_values_0 = hr_values[1] - (time_values[1] - time_values[0]) 
-                    print(f"Calculated hr_values_0: {hr_values_0}")
-                    
-                    # Reassign the first node's hr value
-                    lr.nodes[0].hr = hr_values_0
-                    
-                    # Verify the change
-                    updated_hr_values = [node.hr for node in lr.nodes]
-                    print(f"Updated hr values: {updated_hr_values}")
-                    print("-" * 50)
 
-    if right_rsa.laterals:
-        for lr in right_rsa.laterals:
-            hr_values = [node.hr for node in lr.nodes]
-            time_values = [node.time for node in lr.nodes]
-            
-            # Check if first entry has hr=0 but time!=0
-            if hr_values and time_values and len(hr_values) > 1 and len(time_values) > 1:
-                if hr_values[0] == 0 and time_values[0] != 0:
-                    print(f"FOUND: First node has hr=0 but time={time_values[0]}")
-                    print(f"Original hr values: {hr_values}")
-                    print(f"Time values: {time_values}")
-                    
-                    # Calculate corrected hr value for first node
-                    hr_values_0 = hr_values[1] - (time_values[1] - time_values[0]) 
-                    print(f"Calculated hr_values_0: {hr_values_0}")
-                    
-                    # Reassign the first node's hr value
-                    lr.nodes[0].hr = hr_values_0
-                    
-                    # Verify the change
-                    updated_hr_values = [node.hr for node in lr.nodes]
-                    print(f"Updated hr values: {updated_hr_values}")
-                    print("-" * 50)        
-        
+    left_rsa  = get_root(left)
+    right_rsa = get_root(right)
+
+    def _fix_first_node_hr_if_needed(lr):
+        """
+        Correct hr at index 0 if hr[0]==0 but time[0]!=0; return True if changed.
+        """
+        hr_values   = [node.hr  for node in lr.nodes]
+        time_values = [node.time for node in lr.nodes]
+
+        if len(hr_values) > 1 and len(time_values) > 1:
+            if hr_values[0] == 0 and time_values[0] != 0:
+                _p(f"FOUND: First node has hr=0 but time={time_values[0]}")
+                _p(f"Original hr values: {hr_values}")
+                _p(f"Time values: {time_values}")
+
+                hr_values_0 = hr_values[1] - (time_values[1] - time_values[0])
+                _p(f"Calculated hr_values_0: {hr_values_0}")
+
+                lr.nodes[0].hr = hr_values_0
+
+                updated_hr_values = [node.hr for node in lr.nodes]
+                _p(f"Updated hr values: {updated_hr_values}")
+                _p("-" * 50)
+                return True
+        return False
+
+    def _apply_hr_fixes(root):
+        if root.laterals:
+            for lr in root.laterals:
+                changed = _fix_first_node_hr_if_needed(lr)
+                if changed:
+                    # re-derive attributes from corrected hr
+                    lr.set_data()
+
+    _apply_hr_fixes(left_rsa)
+    _apply_hr_fixes(right_rsa)
+
     return left_rsa, right_rsa, RSA_dict
+
 
 
 if __name__ == "__main__":
