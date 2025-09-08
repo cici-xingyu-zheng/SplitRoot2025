@@ -31,113 +31,200 @@ label_dict = {0: 'LL', 1: 'LH', 2: 'HL', 3: 'HH', 4: 'LM', 5: 'ML', 6: 'MM'}
 full_condition_order = ['homo-high', 'hetero-high', 'hetero-low', 'homo-low', 'homo-medium', 'hetero-medium', 'hetero-low(medium)'] 
 
 
-def correct_timepoints(roots, dataset):
+# def correct_timepoints(roots, dataset):
+#     """
+#     Extract corrected timepoints from rsml files and ensure no duplicates when rounded.
+    
+#     Parameters:
+#     -----------
+#     roots : list
+#         List of root data where each element contains root file information
+#     dataset : str
+#         Dataset identifier used for path construction
+        
+#     Returns:
+#     --------
+#     list
+#         Corrected timepoints with no duplicates when rounded to integers
+#     """
+#     meta_corrections_roots = []
+#     for root in roots:
+#         file_name = f'../Data/Hirros{dataset}/{root[0]}'
+#         # convert xml to dict:
+#         with open(file_name, 'r', encoding='utf-8') as file:
+#             rsml = file.read()
+
+#         RSA_dict = xmltodict.parse(rsml)
+#         hr_correction = RSA_dict['rsml']['metadata']['observation-hours']
+#         hr_correction = [round(float(x)) for x in hr_correction.split(',')] 
+        
+#         meta_corrections_roots.append(hr_correction)
+
+#     meta_corrections_roots = np.array(meta_corrections_roots)
+
+#     # Get the mode for each timepoint
+#     modes = stats.mode(meta_corrections_roots, axis=0)
+#     mode_values = modes.mode.flatten()  # Get the mode values as a flat array
+    
+#     # Some printing to inform if there is a halt in the middle of the process:
+#     n_rows = meta_corrections_roots.shape[0]
+#     mode_counts = modes.count
+#     # Check each column for variations
+#     for col in range(meta_corrections_roots.shape[1]):
+#         if mode_counts[col] != n_rows:
+#             unique_values = np.unique(meta_corrections_roots[:, col])
+#             print(f"\nColumn {col} has variations:")
+#             print(f"Unique values: {unique_values}")
+#             # Get counts for each unique value
+#             value_counts = [(val, np.sum(meta_corrections_roots[:, col] == val)) 
+#                             for val in unique_values]
+#             print("Value counts:")
+#             for val, count in value_counts:
+#                 print(f"  Value {val}: {count} occurrences")
+    
+#     # Check for potential duplicates when rounded
+#     duplicate_indices = []
+    
+#     # Find indices of potential duplicates
+#     for i in range(len(mode_values) - 1):
+#         if mode_values[i] == mode_values[i + 1]:
+#             duplicate_indices.append((i, i + 1))
+    
+#     # Resolve duplicates
+#     for i, j in duplicate_indices:
+#         print(f"Found potential duplicate timepoints: {mode_values[i]} and {mode_values[j]} (both round to {mode_values[i]})")
+        
+#         # Decide which one to adjust based on which is closer to its integer
+#         dist_i = abs(mode_values[i] - mode_values[i])
+#         dist_j = abs(mode_values[j] - mode_values[j])
+        
+#         if dist_i <= dist_j:
+#             # Adjust the second timepoint
+#             if mode_values[j] + 1 != mode_values[j+1] if j+1 < len(mode_values) else True:
+#                 # If incrementing doesn't create a new duplicate, increment
+#                 mode_values[j] = mode_values[j] + 1
+#                 print(f"  Adjusted second timepoint to {mode_values[j]}")
+#             else:
+#                 # If incrementing creates a new duplicate, decrement
+#                 mode_values[j] = mode_values[j] - 1
+#                 print(f"  Adjusted second timepoint to {mode_values[j]}")
+#         else:
+#             # Adjust the first timepoint
+#             if mode_values[i] - 1 != mode_values[i-1] if i > 0 else True:
+#                 # If decrementing doesn't create a new duplicate, decrement
+#                 mode_values[i] = mode_values[i] - 1
+#                 print(f"  Adjusted first timepoint to {mode_values[i]}")
+#             else:
+#                 # If decrementing creates a new duplicate, increment
+#                 mode_values[i] = mode_values[i] + 1
+#                 print(f"  Adjusted first timepoint to {mode_values[i]}")
+    
+#     final_timepoints = mode_values
+    
+#     # Verify no duplicates remain
+#     if len(final_timepoints) != len(set(final_timepoints)):
+#         print("Warning: Duplicates still exist after adjustment!")
+#         # Find remaining duplicates
+#         seen = set()
+#         duplicates = []
+#         for i, val in enumerate(final_timepoints):
+#             if val in seen:
+#                 duplicates.append(i)
+#             seen.add(val)
+        
+#         # Force resolve any remaining duplicates
+#         for i in duplicates:
+#             final_timepoints[i] += 1
+#             print(f"Forced resolution: Incremented timepoint at index {i} to {final_timepoints[i]}")
+    
+#     return final_timepoints.tolist()
+
+import numpy as np
+import xmltodict
+from collections import Counter
+
+def correct_timepoints_from_files(filepaths, *, verbose=False, enforce_strict=True):
     """
-    Extract corrected timepoints from rsml files and ensure no duplicates when rounded.
-    
-    Parameters:
-    -----------
-    roots : list
-        List of root data where each element contains root file information
-    dataset : str
-        Dataset identifier used for path construction
-        
-    Returns:
-    --------
-    list
-        Corrected timepoints with no duplicates when rounded to integers
+    Read `rsml/metadata/observation-hours` from each RSML, round to ints,
+    then take the per-column mode across files. If there are ties, pick the
+    value closest to the column median (still rounded); if still tied, pick
+    the smallest value. Optionally enforce strict monotonic increase (+1 steps).
+
+    Returns
+    -------
+    corrected : list[int]
+        The consensus, strictly increasing timepoint integers.
     """
-    meta_corrections_roots = []
-    for root in roots:
-        file_name = f'../Data/Hirros{dataset}/{root[0]}'
-        # convert xml to dict:
-        with open(file_name, 'r', encoding='utf-8') as file:
-            rsml = file.read()
+    _p = print if verbose else (lambda *a, **k: None)
 
-        RSA_dict = xmltodict.parse(rsml)
-        hr_correction = RSA_dict['rsml']['metadata']['observation-hours']
-        hr_correction = [round(float(x)) for x in hr_correction.split(',')] 
-        
-        meta_corrections_roots.append(hr_correction)
+    # 1) Read & round each file's observation-hours
+    rounded_lists = []
+    lengths = []
+    for fp in filepaths:
+        with open(fp, "r", encoding="utf-8") as f:
+            rsml = xmltodict.parse(f.read())
+        hours_str = rsml["rsml"]["metadata"]["observation-hours"]
+        hours = [float(x) for x in hours_str.split(",")]
+        rounded = [int(round(x)) for x in hours]
+        rounded_lists.append(rounded)
+        lengths.append(len(rounded))
 
-    meta_corrections_roots = np.array(meta_corrections_roots)
+    # 2) Align by common length (use min length across files)
+    L = min(lengths) if lengths else 0
+    if L == 0:
+        raise ValueError("No observation-hours found.")
+    if len(set(lengths)) > 1:
+        _p(f"[correct_timepoints] Warning: varying lengths across files {set(lengths)}; truncating to {L}.")
 
-    # Get the mode for each timepoint
-    modes = stats.mode(meta_corrections_roots, axis=0)
-    mode_values = modes.mode.flatten()  # Get the mode values as a flat array
-    
-    # Some printing to inform if there is a halt in the middle of the process:
-    n_rows = meta_corrections_roots.shape[0]
-    mode_counts = modes.count
-    # Check each column for variations
-    for col in range(meta_corrections_roots.shape[1]):
-        if mode_counts[col] != n_rows:
-            unique_values = np.unique(meta_corrections_roots[:, col])
-            print(f"\nColumn {col} has variations:")
-            print(f"Unique values: {unique_values}")
-            # Get counts for each unique value
-            value_counts = [(val, np.sum(meta_corrections_roots[:, col] == val)) 
-                            for val in unique_values]
-            print("Value counts:")
-            for val, count in value_counts:
-                print(f"  Value {val}: {count} occurrences")
-    
-    # Check for potential duplicates when rounded
-    duplicate_indices = []
-    
-    # Find indices of potential duplicates
-    for i in range(len(mode_values) - 1):
-        if mode_values[i] == mode_values[i + 1]:
-            duplicate_indices.append((i, i + 1))
-    
-    # Resolve duplicates
-    for i, j in duplicate_indices:
-        print(f"Found potential duplicate timepoints: {mode_values[i]} and {mode_values[j]} (both round to {mode_values[i]})")
-        
-        # Decide which one to adjust based on which is closer to its integer
-        dist_i = abs(mode_values[i] - mode_values[i])
-        dist_j = abs(mode_values[j] - mode_values[j])
-        
-        if dist_i <= dist_j:
-            # Adjust the second timepoint
-            if mode_values[j] + 1 != mode_values[j+1] if j+1 < len(mode_values) else True:
-                # If incrementing doesn't create a new duplicate, increment
-                mode_values[j] = mode_values[j] + 1
-                print(f"  Adjusted second timepoint to {mode_values[j]}")
-            else:
-                # If incrementing creates a new duplicate, decrement
-                mode_values[j] = mode_values[j] - 1
-                print(f"  Adjusted second timepoint to {mode_values[j]}")
+    meta = np.array([r[:L] for r in rounded_lists], dtype=int)  # shape: (n_files, L)
+
+    # 3) Column-wise mode with robust tie-breaking
+    corrected = []
+    for j in range(L):
+        col = meta[:, j]
+        counts = Counter(col)
+        # candidates with max frequency
+        max_freq = max(counts.values())
+        cands = [v for v, c in counts.items() if c == max_freq]
+
+        if len(cands) == 1:
+            pick = cands[0]
         else:
-            # Adjust the first timepoint
-            if mode_values[i] - 1 != mode_values[i-1] if i > 0 else True:
-                # If decrementing doesn't create a new duplicate, decrement
-                mode_values[i] = mode_values[i] - 1
-                print(f"  Adjusted first timepoint to {mode_values[i]}")
-            else:
-                # If decrementing creates a new duplicate, increment
-                mode_values[i] = mode_values[i] + 1
-                print(f"  Adjusted first timepoint to {mode_values[i]}")
-    
-    final_timepoints = mode_values
-    
-    # Verify no duplicates remain
-    if len(final_timepoints) != len(set(final_timepoints)):
-        print("Warning: Duplicates still exist after adjustment!")
-        # Find remaining duplicates
-        seen = set()
-        duplicates = []
-        for i, val in enumerate(final_timepoints):
-            if val in seen:
-                duplicates.append(i)
-            seen.add(val)
-        
-        # Force resolve any remaining duplicates
-        for i in duplicates:
-            final_timepoints[i] += 1
-            print(f"Forced resolution: Incremented timepoint at index {i} to {final_timepoints[i]}")
-    
-    return final_timepoints.tolist()
+            # tie-break by closeness to median, then by smallest value
+            med = int(round(np.median(col)))
+            cands.sort(key=lambda v: (abs(v - med), v))
+            pick = cands[0]
+        corrected.append(int(pick))
+
+    # 4) Optional strict-increase cleanup: ensure t[i] > t[i-1]
+    if enforce_strict:
+        for i in range(1, L):
+            if corrected[i] <= corrected[i-1]:
+                corrected[i] = corrected[i-1] + 1
+
+    return corrected
+
+
+# Wrapper: (roots, dataset) -> filepaths
+def correct_timepoints(roots, dataset, base_dir="../rsml_files", *, verbose=False, enforce_strict=True):
+    """
+    Wrapper to preserve your earlier call style.
+
+    Parameters
+    ----------
+    roots : iterable
+        Your root listing; each element should expose the filename at index 0 (root[0]).
+    dataset : str|int
+        Dataset code appended to 'Hirros{dataset}'.
+    base_dir : str
+        Base directory containing 'Hirros{dataset}'.
+
+    Returns
+    -------
+    list[int] : corrected timepoints
+    """
+    filepaths = [f"{base_dir}/Hirros{dataset}/{r[0]}" for r in roots]
+    return correct_timepoints_from_files(filepaths, verbose=verbose, enforce_strict=enforce_strict)
 
 
 def get_stagewise_length(roots, choice, max_time, include_primary, corrected_timepoints):

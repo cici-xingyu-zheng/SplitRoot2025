@@ -53,3 +53,7 @@ Next, we will analyze the tabulated output of many samples in one experiment:
 ### Diary 
 
 - (09/06/2025): move the repo over and start reformatting code
+
+- **(09/08/2025) goals of the week:**
+    1. move all function, including LR model functions
+    2. Hirros 13 outputs as a test (since it contains 7 conditions, and 2 genotypes so if it works other should)
