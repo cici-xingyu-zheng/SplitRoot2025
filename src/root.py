@@ -8,6 +8,7 @@ import scipy as sp
 np.random.seed(19680801)
 
 interval = 6
+
 # Now given that the time interval is variable, we use coord_th instead;
 # When coord_th has issues, we use coord_t to correct for it.
 # We need to reasign it.
@@ -97,7 +98,7 @@ class Branch:
                     if coord_t < 2:
                         time = 0.0
                     else:
-                        # need to change to more flexible way
+                        # time is still needed in case coord_th is messed up
                         time = (coord_t - 1) * interval
                     node = Node(x = float(n['@coord_x']) * pxl_len_mm,
                                 y = float(n['@coord_y']) * pxl_len_mm, 

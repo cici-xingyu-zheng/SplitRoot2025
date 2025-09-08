@@ -49,3 +49,7 @@ Next, we will analyze the tabulated output of many samples in one experiment:
 1. Across growth split conditions
 2. Across big vs. small plants
 3. Across genotypes
+
+### Diary 
+
+- (09/06/2025): move the repo over and start reformatting code
