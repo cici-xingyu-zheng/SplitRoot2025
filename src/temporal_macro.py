@@ -1,14 +1,6 @@
 from root import *
 import numpy as np
 
-interval = 12
-
-# def closest_t(num:float):
-#     '''
-#     helper func. to get descrete time points
-#     '''
-#     return round(num / interval) * interval
-
 
 def get_PR_length(rsa: Root, times: list) -> np.ndarray:
     'all lengths containing P2 is a variable of time'
@@ -16,7 +8,6 @@ def get_PR_length(rsa: Root, times: list) -> np.ndarray:
     if not rsa.laterals:   
         Day0_LR_node_0 = []
     else:
-        # Day0_LR_node_0 = [[lr.nodes[0].x, lr.nodes[0].y] for lr in rsa.laterals if lr.nodes[0].time == 0]
         Day0_LR_node_0 = [[lr.nodes[0].x, lr.nodes[0].y] for lr in rsa.laterals if lr.nodes[0].hr == 0]
 
     if len(Day0_LR_node_0) == 1:
@@ -93,7 +84,6 @@ def get_lateral_stage(rsa: Root, include_primary = False) -> list:
     
     # Get the coordinate of the first node for the stage 0 LRs
 
-    # Day0_LR_node_0 = [[lr.nodes[0].x, lr.nodes[0].y] for lr in rsa.laterals if lr.nodes[0].time == 0]
     Day0_LR_node_0 = [[lr.nodes[0].x, lr.nodes[0].y] for lr in rsa.laterals if lr.nodes[0].hr == 0]
     # Get the lowest:
     if len(Day0_LR_node_0) == 1:
@@ -118,38 +108,6 @@ def get_lateral_stage(rsa: Root, include_primary = False) -> list:
 
     return lateral_stages
 
-# NOT USED ANYMORE!
-# def get_lateral_stage_old(rsa: Root, include_primary = False) -> list:
-
-#     '''
-#     From the root object get a list to indicate the lateral root stage.
-
-#     Args: 
-#         rsa: Root Object
-#         include_primary: Boolean, whether to include primary or not.
-
-#     Returns:
-#         lateral_stages: A list of len(# of laterals), with 0: exsit; 1: primary exist; 2: primary has not exist
-#     '''
-    
-#     lateral_stages = []
-#     primary_depth_t0 = rsa.primary.tips[0].y
-    
-#     if include_primary:
-#         lateral_stages.append(0)
-
-#     for lateral in rsa.laterals:
-        
-#         init_depth = lateral.nodes[0].y 
-        
-#         if lateral.nodes[0].hr == 0:
-#             lateral_stages.append(0)
-#         elif init_depth <= primary_depth_t0:
-#             lateral_stages.append(1)
-#         else:
-#             lateral_stages.append(2)
-
-#     return lateral_stages
 
 def get_branchlengths(rsa:Root, include_primary = False) -> list:
     '''
@@ -217,7 +175,6 @@ def stagewise_len_t(all_roots:list,
     tot_lengths = np.zeros(len(corrected_timepoints))
 
     # For every imaging time point:
-    # for t in range(0, max_time, interval):
     for idx, t in enumerate(corrected_timepoints):
         # For every branch to add:
         for i, root in enumerate(all_roots):
@@ -365,3 +322,4 @@ def normalize_len_df(len_df, roots, snapshots, i):
 
     return normalized_df
 
+# add for getting average LR size.

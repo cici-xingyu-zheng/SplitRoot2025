@@ -36,7 +36,6 @@ def get_branch_coors(rsa: Root) -> list:
         times = [node.hr for node in  branch.nodes]
         return times, corrs
     
-
     
     #  Extract coordinates and time data from laterals:
     for lr in rsa.laterals:
@@ -45,20 +44,6 @@ def get_branch_coors(rsa: Root) -> list:
     
     return all_corrs
 
-
-# def nearest_bigger_multiple_of(num:float) -> int:
-#     '''
-#     helper func. we had a simper version for temporal
-#     '''
-#     rounded_number = round(num)
-#     if rounded_number % interval == 0:
-#         return rounded_number 
-#     else:
-#         return rounded_number + (interval - rounded_number % interval)
-
-# Potential failure mode (10/14/24): 
-# lack of enough points on Day 0: PR # of nodes < 3, as there would be zero simplex
-# Current solution: modify the graph directly 
 
 def find_closest_timepoint_index(time, corrected_timepoints):
     """
@@ -124,18 +109,7 @@ def get_pointcloud(all_corrs:list,
         for time, corr in root:
             idx = find_closest_timepoint_index(time, corrected_timepoints)
             root_points[idx].append(corr)
-
-        # for time, corr in root:
-        #     # if time <= max_time:
-        #     # for all points falling on the time measurement (the first node):
-        #     t_round = nearest_bigger_multiple_of(time)
-        #     if time == round(time):
-        #         root_points[(t_round)//interval].append(corr)
-        #     # for all points falling earlier, belong to the previous time point:
-        #     else:
-        #         root_points[(t_round-interval)//interval].append(corr)
-                        
-    # return root_points[0:16]
+                     
     return root_points
 
 def get_area(simplex_tree: gudhi.simplex_tree.SimplexTree, 
