@@ -1,8 +1,8 @@
-from root import *
+from src.root import *
 import numpy as np
 
 
-def get_PR_length(rsa: Root, times: list) -> np.ndarray:
+def get_PR_length(rsa: Root, snapshots: list) -> np.ndarray:
     'all lengths containing P2 is a variable of time'
 
     if not rsa.laterals:   
@@ -31,24 +31,29 @@ def get_PR_length(rsa: Root, times: list) -> np.ndarray:
 
     # get info dependent on time:
     tip_lengths = np.array([tip.length for tip in rsa.primary.tips])
-
-    # tip_times = np.array([tip.time for tip in rsa.primary.tips])
     tip_times = np.array([round(tip.hr) for tip in rsa.primary.tips])
 
     # Initialize the result array
-    P_arr = np.zeros((len(times), 6))
+    P_arr = np.zeros((len(snapshots), 6))
 
     # Assuming tip_times and tip_lengths are numpy arrays and tip_times is sorted
-    for i, time in enumerate(times):
-        if time in tip_times:
-            Ptotal = tip_lengths[tip_times == time][0]
-        else:
-            # Find the index of the largest time in tip_times that's smaller than 'time'
-            prev_time_index = np.searchsorted(tip_times, time) - 1
+    for i, time in enumerate(snapshots):
+        # if time in tip_times:
+        #     Ptotal = tip_lengths[tip_times == time][0]
+        # else:
+        #     # Find the index of the largest time in tip_times that's smaller than 'time'
+        #     prev_time_index = np.searchsorted(tip_times, time) - 1
             
-            Ptotal = tip_lengths[prev_time_index]
-            print(f"Time {time} not found. Using closest previous time: {tip_times[prev_time_index]}")
-    
+        #     Ptotal = tip_lengths[prev_time_index]
+        #     print(f"Time {time} not found. Using closest previous time: {tip_times[prev_time_index]}")
+
+        # return the insert index after equality, so -1 if time < first element
+        idx = np.searchsorted(tip_times, time, side="right") - 1
+        if idx < 0:
+            Ptotal = np.nan # shouldn't happen; first time in snapshots should be zero
+        else:
+            Ptotal = tip_lengths[idx]
+
         P2 = Ptotal - P01
         P12 = Ptotal - P0
         P_arr[i] = [P0, P1, P2, P01, P12, Ptotal]
@@ -152,7 +157,6 @@ def get_branchlengths(rsa:Root, include_primary = False) -> list:
 
 
 def stagewise_len_t(all_roots:list, 
-                    max_time:int, 
                     lateral_stages:list, 
                     stage_choice:int,
                     corrected_timepoints = None)  -> np.ndarray:
@@ -230,7 +234,6 @@ def stagewise_len_t(all_roots:list,
     return tot_lengths
 
 def stagewise_num_lat_t(rsa: Root, 
-                        max_time:int, 
                         lateral_stages:list, 
                         stage_choice:int,
                         corrected_timepoints = None) -> np.ndarray:
@@ -239,7 +242,6 @@ def stagewise_num_lat_t(rsa: Root,
     
     Args:
         rsa: Root object
-        max_time: the max image time, used to set the number of snapshots we take.
         lateral_stages: A list of stages with len(lrs)
         stage_choice(0, 1, 2): 0: all LR, or if all roots include PR, all branches; 1: stage 1+2; 2: just stage 2
 
@@ -285,41 +287,3 @@ def stagewise_num_lat_t(rsa: Root,
     # return tot_laterals[:16]
     return tot_laterals
 
-
-def normalize_len_df(len_df, roots, snapshots, i):
-    '''
-    i is the index of which pr to use for normalization;
-    # will change to just normalize_df()
-    '''
-    normalized_df = len_df.copy()
-    
-    for root in roots:
-        index = root[0]
-        # print(index)
-        
-        # Get the left and right rows
-        left_mask = (normalized_df.index == index) & (normalized_df['side'] == 'L')
-        right_mask = (normalized_df.index == index) & (normalized_df['side'] == 'R')
-        
-        # Extract the snapshot values
-        row_left = normalized_df.loc[left_mask, snapshots].to_numpy()
-        row_right = normalized_df.loc[right_mask, snapshots].to_numpy()
-
-        # Calculate the P arrays
-        # Pick the type of primary matched to this len_df at all timepoints
-        P_arr_left = get_PR_length(root[1], snapshots)[:, i] 
-        P_arr_right = get_PR_length(root[2], snapshots)[:, i]
-
-        # Normalize the values
-        normalized_left = row_left / P_arr_left
-        normalized_right = row_right / P_arr_right
-        
-        # Update the DataFrame with normalized values
-        normalized_df.loc[left_mask, snapshots] = normalized_left
-        normalized_df.loc[right_mask, snapshots] = normalized_right
-    
-    normalized_df = normalized_df[snapshots + ['label','condition','side', 'condition-side', 'uniq-condition']]
-
-    return normalized_df
-
-# add for getting average LR size.

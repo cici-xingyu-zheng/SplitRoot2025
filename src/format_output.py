@@ -1,12 +1,13 @@
 # Streamline analysis
 
-from root import *
-from temporal_macro import *
-from spatial_macro import *
+from src.root import *
+from src.temporal_macro import *
+from src.spatial_macro import *
 
 import pandas as pd
 import numpy as np
 import seaborn as sns
+import pickle as pkl
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 from scipy import stats
@@ -14,6 +15,9 @@ from statsmodels.stats.multicomp import pairwise_tukeyhsd
 from statsmodels.stats.multitest import multipletests
 
 import xmltodict
+
+import xmltodict
+from collections import Counter
 
 ### Global variables and dictionaries to format dataframes
 
@@ -31,117 +35,59 @@ label_dict = {0: 'LL', 1: 'LH', 2: 'HL', 3: 'HH', 4: 'LM', 5: 'ML', 6: 'MM'}
 full_condition_order = ['homo-high', 'hetero-high', 'hetero-low', 'homo-low', 'homo-medium', 'hetero-medium', 'hetero-low(medium)'] 
 
 
-# def correct_timepoints(roots, dataset):
-#     """
-#     Extract corrected timepoints from rsml files and ensure no duplicates when rounded.
-    
-#     Parameters:
-#     -----------
-#     roots : list
-#         List of root data where each element contains root file information
-#     dataset : str
-#         Dataset identifier used for path construction
-        
-#     Returns:
-#     --------
-#     list
-#         Corrected timepoints with no duplicates when rounded to integers
-#     """
-#     meta_corrections_roots = []
-#     for root in roots:
-#         file_name = f'../Data/Hirros{dataset}/{root[0]}'
-#         # convert xml to dict:
-#         with open(file_name, 'r', encoding='utf-8') as file:
-#             rsml = file.read()
+def make_label_df(pkl_file, *, order=None, coerce_int=True, validate=True):
+    """
+    Load a {filename -> label} mapping from a pickle file and build label_df.
 
-#         RSA_dict = xmltodict.parse(rsml)
-#         hr_correction = RSA_dict['rsml']['metadata']['observation-hours']
-#         hr_correction = [round(float(x)) for x in hr_correction.split(',')] 
-        
-#         meta_corrections_roots.append(hr_correction)
+    Parameters
+    ----------
+    pkl_file : str | Path
+        Path to a pickle containing a dict-like mapping {filename: label}.
+    order : list[str] | None
+        Optional list of filenames to enforce index order (rows not present in
+        the pickle are dropped; extra entries in the pickle are kept at the end).
+    coerce_int : bool
+        If True, cast labels to int before mapping conditions.
+    validate : bool
+        If True, error if any labels cannot be mapped by `label_dict`.
 
-#     meta_corrections_roots = np.array(meta_corrections_roots)
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with columns:
+          - 'label' (int)
+          - 'condition' (str, from `label_dict`)
+        and index = filenames from the pickle (optionally reordered by `order`).
+    """
+    with open(pkl_file, "rb") as f:
+        labels = pkl.load(f)
 
-#     # Get the mode for each timepoint
-#     modes = stats.mode(meta_corrections_roots, axis=0)
-#     mode_values = modes.mode.flatten()  # Get the mode values as a flat array
-    
-#     # Some printing to inform if there is a halt in the middle of the process:
-#     n_rows = meta_corrections_roots.shape[0]
-#     mode_counts = modes.count
-#     # Check each column for variations
-#     for col in range(meta_corrections_roots.shape[1]):
-#         if mode_counts[col] != n_rows:
-#             unique_values = np.unique(meta_corrections_roots[:, col])
-#             print(f"\nColumn {col} has variations:")
-#             print(f"Unique values: {unique_values}")
-#             # Get counts for each unique value
-#             value_counts = [(val, np.sum(meta_corrections_roots[:, col] == val)) 
-#                             for val in unique_values]
-#             print("Value counts:")
-#             for val, count in value_counts:
-#                 print(f"  Value {val}: {count} occurrences")
-    
-#     # Check for potential duplicates when rounded
-#     duplicate_indices = []
-    
-#     # Find indices of potential duplicates
-#     for i in range(len(mode_values) - 1):
-#         if mode_values[i] == mode_values[i + 1]:
-#             duplicate_indices.append((i, i + 1))
-    
-#     # Resolve duplicates
-#     for i, j in duplicate_indices:
-#         print(f"Found potential duplicate timepoints: {mode_values[i]} and {mode_values[j]} (both round to {mode_values[i]})")
-        
-#         # Decide which one to adjust based on which is closer to its integer
-#         dist_i = abs(mode_values[i] - mode_values[i])
-#         dist_j = abs(mode_values[j] - mode_values[j])
-        
-#         if dist_i <= dist_j:
-#             # Adjust the second timepoint
-#             if mode_values[j] + 1 != mode_values[j+1] if j+1 < len(mode_values) else True:
-#                 # If incrementing doesn't create a new duplicate, increment
-#                 mode_values[j] = mode_values[j] + 1
-#                 print(f"  Adjusted second timepoint to {mode_values[j]}")
-#             else:
-#                 # If incrementing creates a new duplicate, decrement
-#                 mode_values[j] = mode_values[j] - 1
-#                 print(f"  Adjusted second timepoint to {mode_values[j]}")
-#         else:
-#             # Adjust the first timepoint
-#             if mode_values[i] - 1 != mode_values[i-1] if i > 0 else True:
-#                 # If decrementing doesn't create a new duplicate, decrement
-#                 mode_values[i] = mode_values[i] - 1
-#                 print(f"  Adjusted first timepoint to {mode_values[i]}")
-#             else:
-#                 # If decrementing creates a new duplicate, increment
-#                 mode_values[i] = mode_values[i] + 1
-#                 print(f"  Adjusted first timepoint to {mode_values[i]}")
-    
-#     final_timepoints = mode_values
-    
-#     # Verify no duplicates remain
-#     if len(final_timepoints) != len(set(final_timepoints)):
-#         print("Warning: Duplicates still exist after adjustment!")
-#         # Find remaining duplicates
-#         seen = set()
-#         duplicates = []
-#         for i, val in enumerate(final_timepoints):
-#             if val in seen:
-#                 duplicates.append(i)
-#             seen.add(val)
-        
-#         # Force resolve any remaining duplicates
-#         for i in duplicates:
-#             final_timepoints[i] += 1
-#             print(f"Forced resolution: Incremented timepoint at index {i} to {final_timepoints[i]}")
-    
-#     return final_timepoints.tolist()
+    if not hasattr(labels, "items"):
+        raise TypeError("Pickle must contain a dict-like object of {filename: label}.")
 
-import numpy as np
-import xmltodict
-from collections import Counter
+    # Build base df
+    df = pd.DataFrame(data=list(labels.values()),
+                      index=list(labels.keys()),
+                      columns=["label"])
+
+    if coerce_int:
+        df["label"] = pd.to_numeric(df["label"], errors="raise").astype(int)
+
+    # Map to condition using the module-level label_dict
+    # (expects label_dict to exist in format_output.py)
+    missing = set(df["label"].unique()) - set(label_dict.keys())
+    if validate and missing:
+        raise KeyError(
+            f"Found labels with no mapping in label_dict: {sorted(missing)}. "
+            "Update `label_dict` or disable validation with validate=False."
+        )
+
+    df["condition"] = [label_dict.get(x, None) for x in df["label"]]
+
+    return df
+
+
+
 
 def correct_timepoints_from_files(filepaths, *, verbose=False, enforce_strict=True):
     """
@@ -227,7 +173,7 @@ def correct_timepoints(roots, dataset, base_dir="../rsml_files", *, verbose=Fals
     return correct_timepoints_from_files(filepaths, verbose=verbose, enforce_strict=enforce_strict)
 
 
-def get_stagewise_length(roots, choice, max_time, include_primary, corrected_timepoints):
+def get_stagewise_length(roots, choice, include_primary, corrected_timepoints):
     tot_rootlengths = []
     for root in roots:
         print('Sample name:', root[0])
@@ -238,8 +184,8 @@ def get_stagewise_length(roots, choice, max_time, include_primary, corrected_tim
         l_stages =  get_lateral_stage(root[1], include_primary)
         r_stages =  get_lateral_stage(root[2], include_primary)
 
-        left_len_t = stagewise_len_t(left_all, max_time, l_stages, choice, corrected_timepoints)
-        right_len_t = stagewise_len_t(right_all, max_time, r_stages, choice, corrected_timepoints)
+        left_len_t = stagewise_len_t(left_all, l_stages, choice, corrected_timepoints)
+        right_len_t = stagewise_len_t(right_all, r_stages, choice, corrected_timepoints)
 
         tot_t = np.array([left_len_t, right_len_t])
         tot_rootlengths.append(tot_t)
@@ -248,7 +194,7 @@ def get_stagewise_length(roots, choice, max_time, include_primary, corrected_tim
     return tot_rootlengths 
 
 
-def get_stagewise_num(roots, choice, max_time, include_primary, corrected_timepoints):
+def get_stagewise_num(roots, choice, include_primary, corrected_timepoints):
     tot_num_laterals = []
     for root in roots:
         print('Sample name:', root[0])
@@ -257,8 +203,8 @@ def get_stagewise_num(roots, choice, max_time, include_primary, corrected_timepo
         l_stages =  get_lateral_stage(root[1], include_primary)
         r_stages =  get_lateral_stage(root[2], include_primary)
 
-        left_num_t= stagewise_num_lat_t(root[1], max_time, l_stages, choice, corrected_timepoints)
-        right_num_t = stagewise_num_lat_t(root[2], max_time, r_stages, choice, corrected_timepoints)
+        left_num_t= stagewise_num_lat_t(root[1], l_stages, choice, corrected_timepoints)
+        right_num_t = stagewise_num_lat_t(root[2], r_stages, choice, corrected_timepoints)
 
         tot_n = np.array([left_num_t, right_num_t])
         tot_num_laterals.append(tot_n)
@@ -267,7 +213,7 @@ def get_stagewise_num(roots, choice, max_time, include_primary, corrected_timepo
     return tot_num_laterals 
 
 
-def get_area_dfs(roots, labels, max_time, alphas, corrected_timepoints):
+def get_area_dfs(roots, labels, alphas, corrected_timepoints):
     areas = []
     indices = []
     for root in roots:
@@ -276,17 +222,19 @@ def get_area_dfs(roots, labels, max_time, alphas, corrected_timepoints):
         print()
         left_corrs = get_branch_coors(left_root)
         right_corrs = get_branch_coors(right_root)
-        lr_points = get_pointcloud(left_corrs, max_time, corrected_timepoints)
-        rr_points = get_pointcloud(right_corrs, max_time, corrected_timepoints)
+        lr_points = get_pointcloud(left_corrs, corrected_timepoints)
+        rr_points = get_pointcloud(right_corrs, corrected_timepoints)
 
         left_areas = area_over_time(lr_points, alphas)
         right_areas = area_over_time(rr_points, alphas)
         
         for i in range(4):
-            left = ['L', alphas[i], labels[label]] + left_areas[:, i].tolist()
+            # left = ['L', alphas[i], labels[label]] + left_areas[:, i].tolist()
+            left  = ['L', float(alphas[i]), labels[label]] + left_areas[:, i].tolist()
             areas.append(left)
             indices.append(label)
-            right = ['R', alphas[i], labels[label]] + right_areas[:, i].tolist()
+            # right = ['R', alphas[i], labels[label]] + right_areas[:, i].tolist()
+            right = ['R', float(alphas[i]), labels[label]] + right_areas[:, i].tolist()
             areas.append(right)
             indices.append(label)
    
@@ -324,13 +272,14 @@ def get_area_dfs(roots, labels, max_time, alphas, corrected_timepoints):
 
     alpha_areas_dfs = []
     for alpha in alphas:
-        alpha_areas_df = areas_df[areas_df['alpha'] == str(alpha)]
+        # alpha_areas_df = areas_df[areas_df['alpha'] == str(alpha)]
+        alpha_areas_df = areas_df[areas_df['alpha'] == float(alpha)]
         alpha_areas_dfs.append(alpha_areas_df)
     
     return alpha_areas_dfs
 
 
-def get_primary_df(roots, snapshots, label_df):
+def get_primary_over_time_df(roots, snapshots, label_df):
     """
     Create a combined dataframe for all roots with Ptotal values for both left and right sides.
     
@@ -419,18 +368,64 @@ def get_primary_df(roots, snapshots, label_df):
     
     return primary_df
 
-# will add another one for Primary length at t0.
+def get_primary_t0(roots, label_df):
+    # Initialize lists to store data for the final DataFrame
+    data_rows = []
+    
+    for root in roots:
+            filename, left_root, right_root = root
+            # Get all primary lengths for left and right sides, but only at t0:
+            Primary_arr_left = get_PR_length(left_root, [0])[0, :]
+            Primary_arr_right = get_PR_length(right_root, [0])[0, :]
+            
+            # Primary array contains [P0, P1, P2, P01, P12, Ptotal]
+            primary_names = ['P0_length', 'P1_length', 'P2_length', 'P01_length', 'P12_length', 'Ptotal_length']
+            
+            # Get condition for this filename
+            condition = label_df.loc[filename, 'condition']
+            
+            # Create row for left side
+            left_row = {
+                'condition': condition,
+                'side': 'L',
+                'condition-side': f'{condition}-L'
+            }
+            
+            # Add all primary lengths for left side
+            for i, name in enumerate(primary_names):
+                left_row[name] = Primary_arr_left[i]
+            
+            # Create row for right side
+            right_row = {
+                'condition': condition,
+                'side': 'R',
+                'condition-side': f'{condition}-R'
+            }
+            
+            # Add all primary lengths for right side
+            for i, name in enumerate(primary_names):
+                right_row[name] = Primary_arr_right[i]
+            
+            # Add filename as a column (since it will be the index)
+            left_row['filename'] = filename
+            right_row['filename'] = filename
+            
+            data_rows.append(left_row)
+            data_rows.append(right_row)
 
-def organize_df(root_data, max_time, label_df, corrected_timepoints=None):
+    # Create DataFrame from collected data
+    df = pd.DataFrame(data_rows)
+    df.set_index('filename', inplace=True)
+    df['uniq-condition'] = df['condition-side'].map(full_side_dict)
+
+    return df
+
+
+def organize_df(root_data, label_df, corrected_timepoints):
     root_data = np.array(root_data)
     data_sqze = np.concatenate((root_data[:,0, :], root_data[:,1, :]), axis=0)
 
-    if corrected_timepoints is not None:
-        colnames = corrected_timepoints
-    else:
-        print('Using default timepoints with default interval:', interval)
-        print('If this is not the interval used in experiment, please correct it. Danger of failing given uneven intervals. ')
-        colnames = list(range(0, max_time, interval))  # keep int. as it'd be easier to get different time
+    colnames = corrected_timepoints
 
     data_t_df = pd.DataFrame(data_sqze, columns=colnames, index=label_df.index.tolist()*2)
     # add annotation columns
@@ -455,7 +450,6 @@ def organize_df(root_data, max_time, label_df, corrected_timepoints=None):
     
     # Define order based on available conditions
     available_conditions = set(data_t_df['uniq-condition'].unique())
-    # full_condition_order = ['homo-high', 'hetero-high', 'hetero-low', 'homo-low']
     condition_order = [cond for cond in full_condition_order if cond in available_conditions]
     
     # Apply categorical ordering
@@ -464,6 +458,78 @@ def organize_df(root_data, max_time, label_df, corrected_timepoints=None):
                                               ordered=True)
     
     return data_t_df
+
+
+
+def normalize_len_df(len_df, roots, snapshots, i):
+    '''
+    i is the index of which pr to use for normalization;
+    # will change to just normalize_df()
+    '''
+    normalized_df = len_df.copy()
+    
+    for root in roots:
+        index = root[0]
+        # print(index)
+        
+        # Get the left and right rows
+        left_mask = (normalized_df.index == index) & (normalized_df['side'] == 'L')
+        right_mask = (normalized_df.index == index) & (normalized_df['side'] == 'R')
+        
+        # Extract the snapshot values
+        row_left = normalized_df.loc[left_mask, snapshots].to_numpy()
+        row_right = normalized_df.loc[right_mask, snapshots].to_numpy()
+
+        # Calculate the P arrays
+        # Pick the type of primary matched to this len_df at all timepoints
+        P_arr_left = get_PR_length(root[1], snapshots)[:, i] 
+        P_arr_right = get_PR_length(root[2], snapshots)[:, i]
+
+        # Normalize the values
+        normalized_left = row_left / P_arr_left
+        normalized_right = row_right / P_arr_right
+        
+        # Update the DataFrame with normalized values
+        normalized_df.loc[left_mask, snapshots] = normalized_left
+        normalized_df.loc[right_mask, snapshots] = normalized_right
+    
+    normalized_df = normalized_df[snapshots + ['label','condition','side', 'condition-side', 'uniq-condition']]
+
+    return normalized_df
+
+def get_avg_len_df(len_df, num_df, snapshots):
+    """
+    Compute average lateral length (len / num) from length and number DataFrames.
+
+    Parameters
+    ----------
+    len_df : pd.DataFrame
+        Output of organize_df with root lengths.
+    num_df : pd.DataFrame
+        Output of organize_df with lateral counts.
+    snapshots : list
+        List of snapshot timepoints (column names to use for division).
+
+    Returns
+    -------
+    avg_len_df : pd.DataFrame
+        DataFrame of same shape, with entries len/num (0 if num==0).
+    """
+    # Copy structure from len_df to preserve metadata columns
+    avg_len_df = len_df.copy()
+
+    # Safe division: where num==0, result=0
+    for t in snapshots:
+        L = pd.to_numeric(len_df[t], errors="coerce").fillna(0)
+        N = pd.to_numeric(num_df[t], errors="coerce").fillna(0)
+        avg = np.where((N > 0) & (L > 0), L / N, 0.0)
+        avg_len_df[t] = avg
+
+    # Reorder columns (snapshots first, then metadata)
+    meta_cols = [c for c in len_df.columns if c not in snapshots]
+    avg_len_df = avg_len_df[snapshots + meta_cols]
+
+    return avg_len_df
 
 
 def visualize_dataset(df, snapshot, measure, set_max=None, ylab=None, save_name=None):
@@ -537,3 +603,143 @@ def visualize_dataset(df, snapshot, measure, set_max=None, ylab=None, save_name=
     
     if save_name:
         fig.savefig(f'{save_name}.pdf', transparent=True)
+
+
+def visualize_over_time(input_df,
+                        corrected_timepoints,
+                        measure: str,            # one of: "len", "num", "area"
+                        ylim=None,
+                        ylab=None,
+                        title=None,
+                        save_name=None):
+    """
+    Plot mean ± SEM over time for a DataFrame produced by `organize_df`
+    (e.g., len_df, num_df, area_df). Colors and condition ordering match
+    `visualize_dataset`.
+
+    Parameters
+    ----------
+    input_df : pd.DataFrame
+        Output of `organize_df` (must contain columns for each timepoint
+        in `corrected_timepoints`, and a 'uniq-condition' column).
+    corrected_timepoints : list
+        The timepoint columns to plot (e.g., the consensus hours).
+    measure : {"len","num","area"}
+        Controls color palette selection and default y-label.
+    ylim : float | (float, float) | None
+        If float, interpreted as (0, ylim). If tuple, used directly.
+    ylab : str | None
+        Y-axis label; if None, a sensible default is chosen.
+    title : str | None
+        Figure title; if None, a generic title is used.
+    save_name : str | None
+        If provided, saves the figure to '{save_name}.pdf' (transparent).
+    """
+    import pandas as pd
+    import numpy as np
+    import seaborn as sns
+    import matplotlib.pyplot as plt
+    import matplotlib.colors as mcolors
+
+    # --- condition ordering & palette (matching visualize_dataset) ---
+    full_order = ['homo-high', 'hetero-high', 'hetero-low', 'homo-low',
+                  'homo-medium', 'hetero-medium', 'hetero-low(medium)']
+    available_conditions = sorted(
+        input_df['uniq-condition'].dropna().unique(),
+        key=lambda x: full_order.index(x) if x in full_order else float('inf')
+    )
+
+    def lighten_color(color, amount=0.3):
+        """Lighten a color by reducing saturation (used for *-medium entries)."""
+        if isinstance(color, str) and color.startswith('#'):
+            rgb = mcolors.hex2color(color)
+        else:
+            rgb = mcolors.to_rgb(color)
+        hsv = mcolors.rgb_to_hsv(rgb)
+        hsv[1] = hsv[1] * (1 - amount)  # reduce saturation
+        return mcolors.hsv_to_rgb(hsv)
+
+    base_colors = {
+        'len':  [sns.color_palette("Set2")[-4], '#d1e231',
+                 sns.color_palette("Set2")[-3], sns.color_palette("Set2")[-2]],
+        'num':  [sns.color_palette("Paired")[4], sns.color_palette("Set2")[3],
+                 sns.color_palette("Paired")[8], sns.color_palette("Set2")[-1]],
+        'area': ['royalblue', 'dodgerblue', 'cornflowerblue', 'lightsteelblue']
+    }
+    # extend to include the three "*-medium" categories (lighter variants)
+    extended = base_colors[measure].copy()
+    extended.append(lighten_color(base_colors[measure][0], 0.4))  # homo-medium
+    extended.append(lighten_color(base_colors[measure][1], 0.4))  # hetero-medium
+    extended.append(lighten_color(base_colors[measure][2], 0.4))  # hetero-low(medium)
+
+    palette = {cond: extended[full_order.index(cond)]
+               for cond in available_conditions if cond in full_order}
+
+    # --- melt and aggregate (mean ± SEM) ---
+    melted_df = pd.melt(input_df,
+                        id_vars=['uniq-condition'],
+                        value_vars=corrected_timepoints,
+                        var_name='time',
+                        value_name=measure)
+
+    melted_df['time'] = pd.to_numeric(melted_df['time'], errors='coerce')
+    # guard against stray NaNs in time
+    melted_df = melted_df.dropna(subset=['time'])
+
+    # compute group stats
+    stats_df = (melted_df
+                .groupby(['uniq-condition', 'time'])[measure]
+                .agg(['mean', 'sem'])
+                .reset_index()
+                .rename(columns={'uniq-condition': 'condition'}))
+
+    # --- plot ---
+    sns.set_style("whitegrid")
+    fig_width = max(7, 1.8 * len(available_conditions))  # scale a bit with #conditions
+    plt.figure(figsize=(fig_width, 6))
+
+    # maintain the legend order as available_conditions
+    for cond in available_conditions:
+        cd = stats_df[stats_df['condition'] == cond]
+        if cd.empty:
+            continue
+        color = palette.get(cond, None)
+        # mean line
+        plt.plot(cd['time'], cd['mean'], label=cond, marker='o', linewidth=2,
+                 color=color)
+        # mean ± SEM band
+        ylo = cd['mean'] - cd['sem']
+        yhi = cd['mean'] + cd['sem']
+        plt.fill_between(cd['time'], ylo, yhi, alpha=0.2, edgecolor='none',
+                         color=color)
+
+    # labels / title
+    default_ylab = {
+        'len': 'Total lateral length',
+        'num': '# laterals',
+        'area': 'Alpha-complex area'
+    }[measure]
+    plt.xlabel('Time (hr)', fontsize=14)
+    plt.ylabel(ylab or default_ylab, fontsize=14)
+    plt.title(title or f'Growth curves by condition ({measure})', fontsize=18)
+
+    # legend
+    if available_conditions:
+        plt.legend(title='Condition', fontsize=12, title_fontsize=12,
+                   loc='best', frameon=True)
+
+    # y-limits
+    if ylim is not None:
+        if isinstance(ylim, (list, tuple)) and len(ylim) == 2:
+            plt.ylim(ylim)
+        else:
+            plt.ylim((0, float(ylim)))
+
+    plt.tight_layout()
+    plt.show()
+
+    if save_name:
+        # save after show so the on-screen image matches the file
+        plt.gcf().savefig(f'{save_name}.pdf', transparent=True)
+
+    # return stats_df  # handy for downstream_
