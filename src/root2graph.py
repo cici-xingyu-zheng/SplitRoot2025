@@ -136,7 +136,7 @@ def plot_rsmlt(G, plate, save_name=None, *, color_attr="hr", flip_y=True, cmap=p
     if not np.isfinite(ratio) or ratio <= 0:
         ratio = 1.0
 
-    fig, ax = plt.subplots(figsize=(14, 10/ratio))
+    fig, ax = plt.subplots(figsize=(12, 10/ratio))
 
     # Draw edges first (thin lines), then colorized nodes
     nx.draw(
@@ -165,7 +165,7 @@ def plot_rsmlt(G, plate, save_name=None, *, color_attr="hr", flip_y=True, cmap=p
     plt.show()
 
     if save_name is not None:
-        fig.savefig(save_name, dpi=300, bbox_inches="tight")
+        fig.savefig(f'{save_name}.pdf', dpi=300, bbox_inches="tight")
 
 def extract_hr0_graph(G, *, hr_attr="hr", atol=1e-9):
     """
@@ -288,4 +288,4 @@ def plot_hr0(
     plt.show()
 
     if save_name is not None:
-        fig.savefig(save_name, dpi=300, bbox_inches="tight")
+        fig.savefig(f'{save_name}.pdf', dpi=300, bbox_inches="tight")

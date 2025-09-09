@@ -468,7 +468,6 @@ def normalize_df(len_df, roots, snapshots, i):
     - 0/0 -> 0
     - nonzero/0 -> 0 and PRINT a warning with times
     """
-    import numpy as np
     normalized_df = len_df.copy()
 
     for root in roots:
@@ -668,11 +667,7 @@ def visualize_over_time(input_df,
     save_name : str | None
         If provided, saves the figure to '{save_name}.pdf' (transparent).
     """
-    import pandas as pd
-    import numpy as np
-    import seaborn as sns
-    import matplotlib.pyplot as plt
-    import matplotlib.colors as mcolors
+
 
     # --- condition ordering & palette (matching visualize_dataset) ---
     full_order = ['homo-high', 'hetero-high', 'hetero-low', 'homo-low',
@@ -728,7 +723,7 @@ def visualize_over_time(input_df,
 
     # --- plot ---
     sns.set_style("whitegrid")
-    plt.figure(figsize=(10, 6))
+    fig = plt.figure(figsize=(10, 6))
 
     # maintain the legend order as available_conditions
     for cond in available_conditions:
@@ -771,7 +766,5 @@ def visualize_over_time(input_df,
     plt.show()
 
     if save_name:
-        # save after show so the on-screen image matches the file
-        plt.gcf().savefig(f'{save_name}.pdf', transparent=True)
+        fig.savefig(f'{save_name}.pdf', transparent=True)
 
-    # return stats_df  # handy for downstream_
