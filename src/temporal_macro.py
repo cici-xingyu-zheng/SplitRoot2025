@@ -156,82 +156,189 @@ def get_branchlengths(rsa:Root, include_primary = False) -> list:
     return all_roots
 
 
-def stagewise_len_t(all_roots:list, 
-                    lateral_stages:list, 
-                    stage_choice:int,
-                    corrected_timepoints = None)  -> np.ndarray:
+def stagewise_len_t(all_roots: list, 
+                    lateral_stages: list, 
+                    stage_choice: int,
+                    corrected_timepoints=None,
+                    verbose: bool = False) -> np.ndarray:
+    """
+    Get the stage-wise total LR lengths or total root length (including PR) at each imaging time point.
 
-    '''
-    Get the stage-wise total LR lengths or total root length (including PR) at each imaging time points.
-    
     Args:
-        all_roots: A list of list for tip length and the associated time for each branch
-        max_time: the max image time, used to set the number of snapshots we take.
-        lateral_stages: A list of stages with len(lrs)
-        stage_choice(0, 1, 10, 2, 21, 210)
+        all_roots: list[list[tuple(time, length)]]
+            One list per branch; each inner list is [(t0, L0), (t1, L1), ...].
+        lateral_stages: list[int]
+            Stage per branch (0/1/2); if primary included, you likely set its stage to 0 in the caller.
+        stage_choice: int
+            One of {0, 1, 2, 10, 21, 210}; see your original semantics.
+        corrected_timepoints: list[int]
+            Consensus imaging hours (sorted).
+        verbose: bool
+            If True, prints detailed aggregation info.
 
     Returns:
-        tot_lengths (nparray): total length at each imaged timepoint
+        np.ndarray
+            Total length at each timepoint.
+    """
+    if corrected_timepoints is None:
+        raise ValueError("stagewise_len_t requires 'corrected_timepoints' (sorted ints).")
 
-    '''
+    def vprint(*args, **kwargs):
+        if verbose:
+            print(*args, **kwargs)
 
-    # tot_lengths = np.zeros((max_time//interval + 1))
-    tot_lengths = np.zeros(len(corrected_timepoints))
+    T = len(corrected_timepoints)
+    tot_lengths = np.zeros(T, dtype=float)
 
-    # For every imaging time point:
+    vprint(f"[stagewise_len_t] branches={len(all_roots)}, timepoints={T}, choice={stage_choice}")
+
     for idx, t in enumerate(corrected_timepoints):
-        # For every branch to add:
+        included = 0
+        vprint(f"\n[t={t}] aggregating...")
+
         for i, root in enumerate(all_roots):
-
-            # If it is the primary root, or stage 1 or 2 roots
-            if stage_choice == 210: # if include all
+            # Decide inclusion based on stage choice
+            s = lateral_stages[i] if i < len(lateral_stages) else None
+            if stage_choice == 210:         # include all
                 include = True
-
-            elif stage_choice == 21: # if include stage 1 and 2
-                include = lateral_stages[i]
-                
-            elif stage_choice == 2: # if include stage 2 only
-                include = (lateral_stages[i]==2)
-
+            elif stage_choice == 21:        # include stage 1 and 2
+                include = bool(s)           # 0->False, 1/2->True
+            elif stage_choice == 2:
+                include = (s == 2)
             elif stage_choice == 1:
-                include = (lateral_stages[i]==1)
-            
-            elif stage_choice == 10:
-                include = (lateral_stages[i]!=2)
-            
+                include = (s == 1)
+            elif stage_choice == 10:        # include stage 0 and 1
+                include = (s != 2)
             elif stage_choice == 0:
-                include = (lateral_stages[i]==0)
+                include = (s == 0)
+            else:
+                include = False  # unknown code -> exclude
 
-            if include:
-                # 1. if root exist before t (meaning that we can add):
-                if root[0][0] <= t:
-                    # we will had to the growth before this imaging time
-                    print(f'{i}th root at {t} hr to be added')
-                    added = False  
-                    #  1.1 find the (hopefully) nearest time point:
-                    for (t_prime, root_prime) in root:
-                        if round(t_prime) == t:
-                            tot_lengths[idx] += root_prime
-                        # if closest_t(t_prime) == t:
-                        #     tot_lengths[t//interval] += root_prime
-                            added = True
-                            break
+            if not include:
+                vprint(f"  - branch {i}: stage={s} -> excluded by choice={stage_choice}")
+                continue
 
-                    # 1.2 if there is no near timepoint (no growth), 
-                    # then find the the most recent prev. one as the length:
-                    # if skip slide is not allowed then this is not needed at all
-                    if not added:
-                        for (t_prime, root_prime) in root:
-                            if t_prime < t:
-                                root_prev = root_prime           
-                        # tot_lengths[t//interval] += root_prev
-                        tot_lengths[idx] += root_prev
+            # Only add if the branch exists by time t
+            if root and root[0][0] <= t:
+                included += 1
+                added = False
+                used_time = None
+                val = 0.0
+
+                # Try exact (rounded) time match first
+                for (t_prime, root_prime) in root:
+                    if round(t_prime) == t:
+                        tot_lengths[idx] += root_prime
+                        val = root_prime
+                        used_time = t_prime
                         added = True
-    
-                    print(f'{i}th root at {t} hr added:', added)
+                        vprint(f"  ✓ branch {i}: stage={s} exact match at {t_prime} -> +{root_prime:.3f}")
+                        break
 
-    # return tot_lengths[:16]
+                # Otherwise use the most recent previous value
+                if not added:
+                    prev_val = None
+                    prev_t = None
+                    for (t_prime, root_prime) in root:
+                        if t_prime < t:
+                            prev_val = root_prime
+                            prev_t = t_prime
+                    if prev_val is not None:
+                        tot_lengths[idx] += prev_val
+                        val = prev_val
+                        used_time = prev_t
+                        vprint(f"  ✓ branch {i}: stage={s} prev match at {prev_t} -> +{prev_val:.3f}")
+                    else:
+                        # Shouldn't happen because root[0][0] <= t, but guard anyway
+                        vprint(f"  ! branch {i}: stage={s} no usable sample ≤ {t}; adding +0")
+
+            else:
+                first_t = root[0][0] if root else None
+                vprint(f"  - branch {i}: stage={s} not yet present at t={t} (first={first_t}); skip")
+
+        vprint(f"[t={t}] included {included} branches -> total={tot_lengths[idx]:.3f}")
+
+    vprint("\n[stagewise_len_t] done.")
     return tot_lengths
+
+
+# def stagewise_len_t(all_roots:list, 
+#                     lateral_stages:list, 
+#                     stage_choice:int,
+#                     corrected_timepoints = None,
+#                     verbose = False)  -> np.ndarray:
+
+#     '''
+#     Get the stage-wise total LR lengths or total root length (including PR) at each imaging time points.
+    
+#     Args:
+#         all_roots: A list of list for tip length and the associated time for each branch
+#         max_time: the max image time, used to set the number of snapshots we take.
+#         lateral_stages: A list of stages with len(lrs)
+#         stage_choice(0, 1, 10, 2, 21, 210)
+
+#     Returns:
+#         tot_lengths (nparray): total length at each imaged timepoint
+
+#     '''
+
+#     # tot_lengths = np.zeros((max_time//interval + 1))
+#     tot_lengths = np.zeros(len(corrected_timepoints))
+
+#     # For every imaging time point:
+#     for idx, t in enumerate(corrected_timepoints):
+#         # For every branch to add:
+#         for i, root in enumerate(all_roots):
+
+#             # If it is the primary root, or stage 1 or 2 roots
+#             if stage_choice == 210: # if include all
+#                 include = True
+
+#             elif stage_choice == 21: # if include stage 1 and 2
+#                 include = lateral_stages[i]
+                
+#             elif stage_choice == 2: # if include stage 2 only
+#                 include = (lateral_stages[i]==2)
+
+#             elif stage_choice == 1:
+#                 include = (lateral_stages[i]==1)
+            
+#             elif stage_choice == 10:
+#                 include = (lateral_stages[i]!=2)
+            
+#             elif stage_choice == 0:
+#                 include = (lateral_stages[i]==0)
+
+#             if include:
+#                 # 1. if root exist before t (meaning that we can add):
+#                 if root[0][0] <= t:
+#                     # we will had to the growth before this imaging time
+#                     print(f'{i}th root at {t} hr to be added')
+#                     added = False  
+#                     #  1.1 find the (hopefully) nearest time point:
+#                     for (t_prime, root_prime) in root:
+#                         if round(t_prime) == t:
+#                             tot_lengths[idx] += root_prime
+#                         # if closest_t(t_prime) == t:
+#                         #     tot_lengths[t//interval] += root_prime
+#                             added = True
+#                             break
+
+#                     # 1.2 if there is no near timepoint (no growth), 
+#                     # then find the the most recent prev. one as the length:
+#                     # if skip slide is not allowed then this is not needed at all
+#                     if not added:
+#                         for (t_prime, root_prime) in root:
+#                             if t_prime < t:
+#                                 root_prev = root_prime           
+#                         # tot_lengths[t//interval] += root_prev
+#                         tot_lengths[idx] += root_prev
+#                         added = True
+    
+#                     print(f'{i}th root at {t} hr added:', added)
+
+#     # return tot_lengths[:16]
+#     return tot_lengths
 
 def stagewise_num_lat_t(rsa: Root, 
                         lateral_stages:list, 

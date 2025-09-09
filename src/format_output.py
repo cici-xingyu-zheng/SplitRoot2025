@@ -176,8 +176,9 @@ def correct_timepoints(roots, dataset, base_dir="../rsml_files", *, verbose=Fals
 def get_stagewise_length(roots, choice, include_primary, corrected_timepoints):
     tot_rootlengths = []
     for root in roots:
-        print('Sample name:', root[0])
         print('------')
+        print('Sample name:', root[0])
+        
         left_all = get_branchlengths(root[1], include_primary)
         right_all = get_branchlengths(root[2], include_primary)
 
@@ -197,8 +198,8 @@ def get_stagewise_length(roots, choice, include_primary, corrected_timepoints):
 def get_stagewise_num(roots, choice, include_primary, corrected_timepoints):
     tot_num_laterals = []
     for root in roots:
-        print('Sample name:', root[0])
         print('------')
+        print('Sample name:', root[0])
 
         l_stages =  get_lateral_stage(root[1], include_primary)
         r_stages =  get_lateral_stage(root[2], include_primary)
@@ -218,7 +219,8 @@ def get_area_dfs(roots, labels, alphas, corrected_timepoints):
     indices = []
     for root in roots:
         label, left_root, right_root = root
-        print(label)
+        print('------')
+        print('Sample name:', label)
         print()
         left_corrs = get_branch_coors(left_root)
         right_corrs = get_branch_coors(right_root)
@@ -230,19 +232,18 @@ def get_area_dfs(roots, labels, alphas, corrected_timepoints):
         
         for i in range(4):
             # left = ['L', alphas[i], labels[label]] + left_areas[:, i].tolist()
-            left  = ['L', float(alphas[i]), labels[label]] + left_areas[:, i].tolist()
+            left  = left_areas[:, i].tolist() +  ['L', alphas[i], labels[label]] 
             areas.append(left)
             indices.append(label)
             # right = ['R', alphas[i], labels[label]] + right_areas[:, i].tolist()
-            right = ['R', float(alphas[i]), labels[label]] + right_areas[:, i].tolist()
+            right = right_areas[:, i].tolist() + ['R', alphas[i], labels[label]] 
             areas.append(right)
             indices.append(label)
-   
-    areas = np.array(areas)
 
+    areas = np.array(areas)
     timepoints = corrected_timepoints
 
-    areas_df = pd.DataFrame(areas, columns=['side', 'alpha', 'label'] + timepoints, index=indices)
+    areas_df = pd.DataFrame(areas, columns= timepoints + ['side', 'alpha', 'label'], index=indices)
 
     conditions = [label_dict[int(label)] for label in areas_df["label"].tolist()]
     areas_df['condition'] = conditions
@@ -250,14 +251,14 @@ def get_area_dfs(roots, labels, alphas, corrected_timepoints):
 
     # Get the unique conditions in the current dataset
     unique_conditions = set(areas_df['condition-side'].tolist())
-    
+
     # Filter side_dict to only include relevant entries
     filtered_side_dict = {k: v for k, v in full_side_dict.items() if k in unique_conditions}
-    
+
     # Apply mapping
     labelsides = areas_df['condition-side'].tolist()
     areas_df['uniq-condition'] = [filtered_side_dict.get(l) for l in labelsides]
-    
+
     # Define order based on available conditions
     available_conditions = set(areas_df['uniq-condition'].unique())
 
@@ -269,11 +270,11 @@ def get_area_dfs(roots, labels, alphas, corrected_timepoints):
                                                 
     for timepoint in timepoints:
         areas_df[timepoint] = pd.to_numeric(areas_df[timepoint])
+        areas_df['alpha'] = pd.to_numeric(areas_df['alpha'], errors='raise').astype(int)
 
     alpha_areas_dfs = []
     for alpha in alphas:
-        # alpha_areas_df = areas_df[areas_df['alpha'] == str(alpha)]
-        alpha_areas_df = areas_df[areas_df['alpha'] == float(alpha)]
+        alpha_areas_df = areas_df[areas_df['alpha'] == alpha]
         alpha_areas_dfs.append(alpha_areas_df)
     
     return alpha_areas_dfs
@@ -461,41 +462,73 @@ def organize_df(root_data, label_df, corrected_timepoints):
 
 
 
-def normalize_len_df(len_df, roots, snapshots, i):
-    '''
-    i is the index of which pr to use for normalization;
-    # will change to just normalize_df()
-    '''
+def normalize_df(len_df, roots, snapshots, i):
+    """
+    Normalize length-like DataFrame by a chosen PR series (index i in get_PR_length columns).
+    - 0/0 -> 0
+    - nonzero/0 -> 0 and PRINT a warning with times
+    """
+    import numpy as np
     normalized_df = len_df.copy()
-    
+
     for root in roots:
         index = root[0]
-        # print(index)
-        
-        # Get the left and right rows
-        left_mask = (normalized_df.index == index) & (normalized_df['side'] == 'L')
+
+        # Select rows for this sample
+        left_mask  = (normalized_df.index == index) & (normalized_df['side'] == 'L')
         right_mask = (normalized_df.index == index) & (normalized_df['side'] == 'R')
-        
-        # Extract the snapshot values
-        row_left = normalized_df.loc[left_mask, snapshots].to_numpy()
-        row_right = normalized_df.loc[right_mask, snapshots].to_numpy()
 
-        # Calculate the P arrays
-        # Pick the type of primary matched to this len_df at all timepoints
-        P_arr_left = get_PR_length(root[1], snapshots)[:, i] 
-        P_arr_right = get_PR_length(root[2], snapshots)[:, i]
+        # Skip if the row isn't present
+        if not left_mask.any() and not right_mask.any():
+            continue
 
-        # Normalize the values
-        normalized_left = row_left / P_arr_left
-        normalized_right = row_right / P_arr_right
-        
-        # Update the DataFrame with normalized values
-        normalized_df.loc[left_mask, snapshots] = normalized_left
-        normalized_df.loc[right_mask, snapshots] = normalized_right
-    
-    normalized_df = normalized_df[snapshots + ['label','condition','side', 'condition-side', 'uniq-condition']]
+        # Extract numerator rows (may come out shape (1, T); flatten to (T,))
+        if left_mask.any():
+            row_left = normalized_df.loc[left_mask, snapshots].to_numpy(dtype=float)
+            row_left = np.nan_to_num(row_left, nan=0.0)
+            row_left = row_left.ravel()
+        if right_mask.any():
+            row_right = normalized_df.loc[right_mask, snapshots].to_numpy(dtype=float)
+            row_right = np.nan_to_num(row_right, nan=0.0)
+            row_right = row_right.ravel()
 
+        # Denominators from PR arrays (shape (T,))
+        P_arr_left  = np.nan_to_num(get_PR_length(root[1], snapshots)[:, i], nan=0.0)
+        P_arr_right = np.nan_to_num(get_PR_length(root[2], snapshots)[:, i], nan=0.0)
+
+        # Sanity check on lengths
+        T = len(snapshots)
+        if left_mask.any() and P_arr_left.shape[0] != T:
+            raise ValueError(f"PR(left) length {P_arr_left.shape[0]} != snapshots length {T} for {index}")
+        if right_mask.any() and P_arr_right.shape[0] != T:
+            raise ValueError(f"PR(right) length {P_arr_right.shape[0]} != snapshots length {T} for {index}")
+
+        # LEFT: detect nonzero/0, then safe divide
+        if left_mask.any():
+            bad_left = (P_arr_left == 0) & (row_left != 0)
+            if np.any(bad_left):
+                bad_times = [snapshots[j] for j in np.flatnonzero(bad_left)]
+                print(f"[normalize_df] WARNING: nonzero/0 division for sample {index} side=L at times {bad_times}. Setting to 0.")
+            norm_left = np.divide(row_left, P_arr_left,
+                                  out=np.zeros_like(row_left, dtype=float),
+                                  where=(P_arr_left != 0))
+            normalized_df.loc[left_mask, snapshots] = norm_left
+
+        # RIGHT: detect nonzero/0, then safe divide
+        if right_mask.any():
+            bad_right = (P_arr_right == 0) & (row_right != 0)
+            if np.any(bad_right):
+                bad_times = [snapshots[j] for j in np.flatnonzero(bad_right)]
+                print(f"[normalize_df] WARNING: nonzero/0 division for sample {index} side=R at times {bad_times}. Setting to 0.")
+            norm_right = np.divide(row_right, P_arr_right,
+                                   out=np.zeros_like(row_right, dtype=float),
+                                   where=(P_arr_right != 0))
+            normalized_df.loc[right_mask, snapshots] = norm_right
+
+    # Keep column order
+    normalized_df = normalized_df[snapshots + ['label','condition','side','condition-side','uniq-condition']]
     return normalized_df
+
 
 def get_avg_len_df(len_df, num_df, snapshots):
     """
@@ -695,8 +728,7 @@ def visualize_over_time(input_df,
 
     # --- plot ---
     sns.set_style("whitegrid")
-    fig_width = max(7, 1.8 * len(available_conditions))  # scale a bit with #conditions
-    plt.figure(figsize=(fig_width, 6))
+    plt.figure(figsize=(10, 6))
 
     # maintain the legend order as available_conditions
     for cond in available_conditions:
