@@ -119,3 +119,9 @@ Next, we will analyze the tabulated output of many samples in one experiment:
     2. Hirros 13 outputs as a test (since it contains 7 conditions, and 2 genotypes so if it works other should)
 
 - (09/09/2025): outoput basic csvs and visualizations for all Hirros
+
+- (09/11/2025): tried centroid, made some plotting more clear; planning:
+   1. stage wise sample plotting
+   2. area plotting
+   3. stats? just to see if over time if there is some 
+   4. LR model move over 
