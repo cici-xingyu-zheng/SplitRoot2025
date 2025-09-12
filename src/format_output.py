@@ -231,11 +231,9 @@ def get_area_dfs(roots, labels, alphas, corrected_timepoints):
         right_areas = area_over_time(rr_points, alphas)
         
         for i in range(4):
-            # left = ['L', alphas[i], labels[label]] + left_areas[:, i].tolist()
             left  = left_areas[:, i].tolist() +  ['L', alphas[i], labels[label]] 
             areas.append(left)
             indices.append(label)
-            # right = ['R', alphas[i], labels[label]] + right_areas[:, i].tolist()
             right = right_areas[:, i].tolist() + ['R', alphas[i], labels[label]] 
             areas.append(right)
             indices.append(label)
@@ -278,6 +276,73 @@ def get_area_dfs(roots, labels, alphas, corrected_timepoints):
         alpha_areas_dfs.append(alpha_areas_df)
     
     return alpha_areas_dfs
+
+
+def get_centroid_df(roots, labels, corrected_timepoints):
+    """
+    Build a tidy-wide dataframe of cumulative centroids over time.
+    Columns: <timepoints...>, 'side', 'coord', 'label', 'condition', 'condition-side', 'uniq-condition'
+    Rows: one per (sample, side ['L','R'], coord ['x','y']).
+    """
+    rows = []
+    indices = []
+
+    for root in roots:
+        label, left_root, right_root = root
+        print('------')
+        print('Sample name:', label)
+        print()
+
+        # bin points by corrected timepoints (already rounded/sorted ints)
+        left_corrs  = get_branch_coors(left_root)
+        right_corrs = get_branch_coors(right_root)
+        lr_points = get_pointcloud(left_corrs,  corrected_timepoints)
+        rr_points = get_pointcloud(right_corrs, corrected_timepoints)
+
+        # cumulative (nested) centroid through time
+        left_cents  = centroid_over_time(lr_points)   # (T, 2) => [:,0]=x, [:,1]=y
+        right_cents = centroid_over_time(rr_points)
+
+        # Pack rows mirroring your area df structure (one series per coord & side)
+        # Left
+        for j, coord_name in enumerate(['x', 'y']):
+            vals = left_cents[:, j].tolist() + ['L', coord_name, labels[label]]
+            rows.append(vals)
+            indices.append(label)
+        # Right
+        for j, coord_name in enumerate(['x', 'y']):
+            vals = right_cents[:, j].tolist() + ['R', coord_name, labels[label]]
+            rows.append(vals)
+            indices.append(label)
+
+    rows = np.array(rows, dtype=object)
+    timepoints = corrected_timepoints
+
+    df = pd.DataFrame(rows, columns=timepoints + ['side', 'coord', 'label'], index=indices)
+
+    # Attach condition metadata (expects label_dict, full_side_dict, full_condition_order in scope)
+    conditions = [label_dict[int(lbl)] for lbl in df["label"].tolist()]
+    df['condition'] = conditions
+    df['condition-side'] = df['condition'] + '-' + df['side']
+
+    # keep only relevant entries from full_side_dict
+    unique_conditions = set(df['condition-side'].tolist())
+    filtered_side_dict = {k: v for k, v in full_side_dict.items() if k in unique_conditions}
+    df['uniq-condition'] = [filtered_side_dict.get(cs) for cs in df['condition-side'].tolist()]
+
+    # ordered categorical for plotting
+    available_conditions = set(df['uniq-condition'].unique())
+    condition_order = [cond for cond in full_condition_order if cond in available_conditions]
+    df['uniq-condition'] = pd.Categorical(df['uniq-condition'],
+                                          categories=condition_order,
+                                          ordered=True)
+
+    # ensure numeric
+    for tp in timepoints:
+        df[tp] = pd.to_numeric(df[tp], errors='coerce')
+
+    return df
+
 
 
 def get_primary_over_time_df(roots, snapshots, label_df):
@@ -647,27 +712,8 @@ def visualize_over_time(input_df,
     """
     Plot mean ± SEM over time for a DataFrame produced by `organize_df`
     (e.g., len_df, num_df, area_df). Colors and condition ordering match
-    `visualize_dataset`.
-
-    Parameters
-    ----------
-    input_df : pd.DataFrame
-        Output of `organize_df` (must contain columns for each timepoint
-        in `corrected_timepoints`, and a 'uniq-condition' column).
-    corrected_timepoints : list
-        The timepoint columns to plot (e.g., the consensus hours).
-    measure : {"len","num","area"}
-        Controls color palette selection and default y-label.
-    ylim : float | (float, float) | None
-        If float, interpreted as (0, ylim). If tuple, used directly.
-    ylab : str | None
-        Y-axis label; if None, a sensible default is chosen.
-    title : str | None
-        Figure title; if None, a generic title is used.
-    save_name : str | None
-        If provided, saves the figure to '{save_name}.pdf' (transparent).
+    `visualize_dataset`. Medium tiers use dashed lines for readability.
     """
-
 
     # --- condition ordering & palette (matching visualize_dataset) ---
     full_order = ['homo-high', 'hetero-high', 'hetero-low', 'homo-low',
@@ -711,10 +757,8 @@ def visualize_over_time(input_df,
                         value_name=measure)
 
     melted_df['time'] = pd.to_numeric(melted_df['time'], errors='coerce')
-    # guard against stray NaNs in time
     melted_df = melted_df.dropna(subset=['time'])
 
-    # compute group stats
     stats_df = (melted_df
                 .groupby(['uniq-condition', 'time'])[measure]
                 .agg(['mean', 'sem'])
@@ -725,15 +769,20 @@ def visualize_over_time(input_df,
     sns.set_style("whitegrid")
     fig = plt.figure(figsize=(10, 6))
 
-    # maintain the legend order as available_conditions
+    # dashed lines for medium tiers
+    dashed_conditions = {'homo-medium', 'hetero-medium', 'hetero-low(medium)'}
+
     for cond in available_conditions:
         cd = stats_df[stats_df['condition'] == cond]
         if cd.empty:
             continue
         color = palette.get(cond, None)
+        linestyle = '--' if cond in dashed_conditions else '-'
+
         # mean line
         plt.plot(cd['time'], cd['mean'], label=cond, marker='o', linewidth=2,
-                 color=color)
+                 color=color, linestyle=linestyle)
+
         # mean ± SEM band
         ylo = cd['mean'] - cd['sem']
         yhi = cd['mean'] + cd['sem']
@@ -767,4 +816,3 @@ def visualize_over_time(input_df,
 
     if save_name:
         fig.savefig(f'{save_name}.pdf', transparent=True)
-

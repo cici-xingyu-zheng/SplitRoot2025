@@ -3,8 +3,6 @@ import gudhi
 from scipy.spatial import Delaunay, distance
 from src.root import *
 
-interval = 12 # hrs; is used only when the inverval is REGULAR through out the experiment.
-
 def get_branch_coors(rsa: Root) -> list:
     '''
     Get lists of root nodes and the assicated time of appearance
@@ -83,31 +81,6 @@ def find_closest_timepoint_index(time, corrected_timepoints):
     
     return closest_index
 
-# def get_pointcloud(all_corrs:list, 
-#                    max_time:int, corrected_timepoints = None) -> list:
-#     '''
-#     Bin points by their associated imaging time.
-
-#     Args:
-#         all_corrs: A list of list for each branch's nodes, represented as a tuple of (time, (x,y)).
-#         max_time:  Max imaging time.
-
-#     Returns:
-#         root_points: A list of list of the newly imaged nodes' coordinates for each imaging time point.
-#     '''
-
-#     if corrected_timepoints is not None:
-#         T = len(corrected_timepoints)
-#     else:
-#         T = max_time//interval + 1
-
-#     root_points = [ [] for _ in range(T)]
-#     for root in all_corrs:
-#         for time, corr in root:
-#             idx = find_closest_timepoint_index(time, corrected_timepoints)
-#             root_points[idx].append(corr)
-                     
-#     return root_points
 
 def get_pointcloud(all_corrs, corrected_timepoints):
     """
@@ -124,80 +97,22 @@ def get_pointcloud(all_corrs, corrected_timepoints):
             root_points[idx].append(xy)
     return root_points
 
-
-# def get_area(simplex_tree: gudhi.simplex_tree.SimplexTree, 
-#              vertices: np.ndarray,  
-#              alpha: float) -> float:
-#     '''
-#     helper to get total area for a particular filtration alpha
-#     '''
-#     # Get the alpha complex filtration
-#     alpha_complex = simplex_tree.get_filtration()
-
-#     # Filter the simplices based on the alpha value
-#     filtered_simplices = [simplex for simplex, filt in alpha_complex if filt <= alpha]
-    
-#     # Extract the triangles from the filtered simplices
-#     alpha_triangles = [vertices[tri] for tri in filtered_simplices if len(tri) == 3]
-    
-#     # Calculate the area of each triangle and sum them up
-#     area = 0
-#     for triangle in alpha_triangles:
-#         a, b, c = triangle
-#         area += 0.5 * abs(a[0] * (b[1] - c[1]) + b[0] * (c[1] - a[1]) + c[0] * (a[1] - b[1]))
-    
-#     return area
-
-
-# def area_over_time(root_points: list, 
-#                    alphas:list) -> np.ndarray:
-#     '''
-#     Function that calculate the alpha complex area overtime, with different filtration threshold.
-
-#     Args:
-#         root_points: A list of list of root points organized by apparent time.
-#         alphas: A list of filtration thresholds for Delaunay triangles.
-
-#     Returns:
-#         areas: a 2D nparray (dim_alphas, dim_timepoints) of alpha complex area over time for each alpha.
-#     '''
-#     areas = [] # will be storing the areas over time for each alpha
-
-#     all_points = [] # we extend this list to include all points emerged during and before the imaging time point
-
-#     for i, points_t in enumerate(root_points):
-#         all_points.extend(points_t)
-#         print(f'the {i}th time point \n')
-
-#         vertices = np.array(all_points)
-
-#         # Compute the Delaunay triangulation
-#         delaunay = Delaunay(vertices)
-
-#         # Create a simplex tree
-#         simplex_tree = gudhi.SimplexTree()
-
-#         # Insert the triangles into the simplex tree with filtration value equal to the circumradius of the triangle
-#         for tri in delaunay.simplices:
-#             triangle_id = list(tri)
-#             triangle_vertices = vertices[triangle_id]
-#             circumcenter = np.mean(triangle_vertices, axis=0)
-#             circumradius = np.max(distance.cdist(triangle_vertices, [circumcenter]))
-#             simplex_tree.insert(triangle_id, filtration=circumradius)
-
-#         # Compute the persistence of the simplex tree up to dimension 2 (triangles)
-#         simplex_tree.persistence(persistence_dim_max=2)
-
-#         areas_alpha = []
-
-#         for alpha in alphas:
-#             area = get_area(simplex_tree, vertices,  alpha)
-#             print(area)
-#             areas_alpha.append(area)
-            
-#         areas.append(areas_alpha)
-    
-#     return np.array(areas) 
+def centroid_over_time(root_points):
+    """
+    Given a list of lists of points per timepoint, return an array (T, 2)
+    of cumulative centroids. If no points yet, emit np.nan for (x,y).
+    """
+    cumul = []
+    cents = []
+    for pts_t in root_points:
+        cumul.extend(pts_t)
+        if len(cumul) == 0:
+            cents.append([np.nan, np.nan])
+        else:
+            arr = np.asarray(cumul, dtype=float)
+            # centroid = mean of all observed points up to this time
+            cents.append(arr.mean(axis=0).tolist())
+    return np.asarray(cents, dtype=float)  # (T,2)
 
 
 def area_over_time(root_points, alphas):
