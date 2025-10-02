@@ -294,7 +294,7 @@ def plot_hr0(
         fig.savefig(f'{save_name}.pdf', dpi=300, bbox_inches="tight")
 
 
-# ---- small helpers ----
+# ----  helpers for area plot ----
 def _infer_side(n, nd):
     if isinstance(n, tuple) and len(n) > 0 and n[0] in ("left", "right"):
         return n[0]
@@ -343,7 +343,7 @@ def plot_root_alpha_singleax(
     alpha=None,                       # set this OR pass triangles_by_side
     triangles_by_side=None,           # {"left": (K,3), "right": (K,3)} indices into each side's pts
     flip_y=True,
-    plate=None,                       # optional, to mimic your title style
+    plate=None,                     
     title=None,
     figsize=(10,10),
     graph_edge_color="k",
@@ -351,7 +351,6 @@ def plot_root_alpha_singleax(
     graph_edge_alpha=0.75,
     draw_nodes=False,
     node_size=6,
-    # colors per side:
     tri_edge_colors={"left": "deepskyblue", "right": "deepskyblue"},
     shade_face_colors={"left": "deepskyblue", "right": "deepskyblue"},
     tri_edge_width=0.6,
@@ -359,7 +358,7 @@ def plot_root_alpha_singleax(
     shade=True,
     shade_alpha=0.14,
     show_axes=False,
-    save_name=None,                   # <<< same behavior as plot_rsmlt: saves f"{save_name}.pdf"
+    save_name=None,                  
     dpi=300
 ):
     """
