@@ -2,6 +2,9 @@ import math
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.collections import PolyCollection
+import networkx as nx
+from scipy.spatial import Delaunay
 
 def roots_to_networkx(left_rsa=None, right_rsa=None, *, connect_laterals=True):
     """
@@ -289,3 +292,157 @@ def plot_hr0(
 
     if save_name is not None:
         fig.savefig(f'{save_name}.pdf', dpi=300, bbox_inches="tight")
+
+
+# ---- small helpers ----
+def _infer_side(n, nd):
+    if isinstance(n, tuple) and len(n) > 0 and n[0] in ("left", "right"):
+        return n[0]
+    s = nd.get("side")
+    if isinstance(s, str) and s.lower() in ("left", "right"):
+        return s.lower()
+    return None
+
+def _xy_from_nodes(G, nodes, flip_y=True):
+    nodes_sorted = sorted(nodes)
+    xs, ys = [], []
+    pos = {}
+    for n in nodes_sorted:
+        d = G.nodes[n]
+        x = float(d.get("x", np.nan))
+        y = float(d.get("y", np.nan))
+        y = -y if flip_y else y
+        xs.append(x); ys.append(y)
+        pos[n] = (x, y)
+    pts = np.column_stack([xs, ys]) if nodes_sorted else np.zeros((0,2))
+    index = {n:i for i,n in enumerate(nodes_sorted)}
+    return pts, nodes_sorted, index, pos
+
+def _circumradius(P):
+    a = np.linalg.norm(P[:,1] - P[:,0], axis=1)
+    b = np.linalg.norm(P[:,2] - P[:,1], axis=1)
+    c = np.linalg.norm(P[:,0] - P[:,2], axis=1)
+    area = 0.5 * np.abs(np.cross(P[:,1] - P[:,0], P[:,2] - P[:,0]))
+    with np.errstate(divide="ignore", invalid="ignore"):
+        R = (a*b*c) / (4.0*area)
+        R[~np.isfinite(R)] = np.inf
+    return R
+
+def _alpha_tris(pts, alpha):
+    if pts.shape[0] < 3:
+        return np.empty((0,3), dtype=int)
+    tri = Delaunay(pts)
+    simplices = tri.simplices
+    keep = _circumradius(pts[simplices]) <= float(alpha)
+    return simplices[keep]
+
+# ---- main plotter (single axes, preserves original distances) ----
+def plot_root_alpha_singleax(
+    G,
+    *,
+    alpha=None,                       # set this OR pass triangles_by_side
+    triangles_by_side=None,           # {"left": (K,3), "right": (K,3)} indices into each side's pts
+    flip_y=True,
+    plate=None,                       # optional, to mimic your title style
+    title=None,
+    figsize=(10,10),
+    graph_edge_color="k",
+    graph_edge_width=1.5,
+    graph_edge_alpha=0.75,
+    draw_nodes=False,
+    node_size=6,
+    # colors per side:
+    tri_edge_colors={"left": "deepskyblue", "right": "deepskyblue"},
+    shade_face_colors={"left": "deepskyblue", "right": "deepskyblue"},
+    tri_edge_width=0.6,
+    tri_edge_alpha=0.8,
+    shade=True,
+    shade_alpha=0.14,
+    show_axes=False,
+    save_name=None,                   # <<< same behavior as plot_rsmlt: saves f"{save_name}.pdf"
+    dpi=300
+):
+    """
+    Plot left and right on ONE axes using the original coordinates.
+    Triangulation is computed per side (alpha-complex) and overlaid with shading.
+    """
+    # split nodes
+    left_nodes, right_nodes = [], []
+    for n, nd in G.nodes(data=True):
+        side = _infer_side(n, nd)
+        if side == "left":  left_nodes.append(n)
+        elif side == "right": right_nodes.append(n)
+
+    # per-side points/positions
+    ptsL, nodesL, idxL, posL = _xy_from_nodes(G, left_nodes,  flip_y=flip_y)
+    ptsR, nodesR, idxR, posR = _xy_from_nodes(G, right_nodes, flip_y=flip_y)
+
+    # triangles per side
+    if triangles_by_side is None:
+        if alpha is None:
+            raise ValueError("Provide 'alpha' or 'triangles_by_side'.")
+        trisL = _alpha_tris(ptsL, alpha)
+        trisR = _alpha_tris(ptsR, alpha)
+    else:
+        trisL = np.asarray(triangles_by_side.get("left", []), dtype=int)
+        trisR = np.asarray(triangles_by_side.get("right", []), dtype=int)
+
+    # compose pos dict for full graph on one axes (preserves spacing)
+    pos_all = {}
+    pos_all.update(posL)
+    pos_all.update(posR)
+
+    # figure
+    fig, ax = plt.subplots(figsize=figsize)
+
+    # draw whole graph (thin)
+    nx.draw(
+        G, pos=pos_all, ax=ax, with_labels=False,
+        node_size=(node_size if draw_nodes else 0),
+        width=graph_edge_width, edge_color=graph_edge_color, alpha=graph_edge_alpha
+    )
+
+    # shade + triplot LEFT
+    if shade and len(trisL) > 0:
+        pcL = PolyCollection([ptsL[t] for t in trisL],
+                             facecolors=shade_face_colors["left"],
+                             edgecolors="none", alpha=shade_alpha, zorder=0)
+        ax.add_collection(pcL)
+    if len(trisL) > 0:
+        ax.triplot(ptsL[:,0], ptsL[:,1], trisL,
+                   color=tri_edge_colors["left"],
+                   linewidth=tri_edge_width, alpha=tri_edge_alpha, zorder=1)
+
+    # shade + triplot RIGHT
+    if shade and len(trisR) > 0:
+        pcR = PolyCollection([ptsR[t] for t in trisR],
+                             facecolors=shade_face_colors["right"],
+                             edgecolors="none", alpha=shade_alpha, zorder=0)
+        ax.add_collection(pcR)
+    if len(trisR) > 0:
+        ax.triplot(ptsR[:,0], ptsR[:,1], trisR,
+                   color=tri_edge_colors["right"],
+                   linewidth=tri_edge_width, alpha=tri_edge_alpha, zorder=1)
+
+    # aesthetics / title
+    ax.set_aspect("equal", adjustable="datalim")
+    ax.autoscale(enable=True)
+    if not show_axes:
+        ax.axis("off")
+    if title is None:
+        if plate is not None and alpha is not None:
+            title = f"Alpha Complex (alpha={alpha}), plate {plate}"
+        elif alpha is not None:
+            title = f"Alpha Complex (alpha={alpha})"
+    if title:
+        ax.set_title(title)
+
+    plt.tight_layout()
+
+    if save_name is not None:
+        fig.savefig(f"{save_name}.pdf", dpi=dpi, bbox_inches="tight")
+        print(f"Saved: {save_name}.pdf")
+
+    return fig, ax, {"left": {"pts": ptsL, "tris": trisL},
+                     "right": {"pts": ptsR, "tris": trisR}}
+
