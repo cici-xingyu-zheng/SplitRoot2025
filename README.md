@@ -84,6 +84,16 @@
 
 ----
 
+### Lateral Root Summary
+
+| Metric                 | Hirros 5 | Hirros 8 | Hirros 10 | Hirros 11 | Hirros 12 | Hirros 13 | **Total** |
+|-------------------------|----------|-----------|------------|------------|------------|------------|-----------|
+| Total Lateral Roots     | 1901     | 1028      | 3715       | 2297       | 3481       | 5710       | **18,132** |
+| Modeled Lateral Roots   | 1694     | 847       | 3164       | 1986       | 2737       | 4538       | **14,966** |
+
+----
+
+
 ## Workflow
 
 We first need to extract from the root object:
@@ -123,9 +133,9 @@ Next, we will analyze the tabulated output of many samples in one experiment:
 - (09/11/2025): tried centroid, made some plotting more clear; planning:
    1. stage wise sample plotting
    2. area plotting
-   3. stats? just to see if over time if there is any issues
-   4. LR model move over 
 
 - **(09/29/2025) goals of the week:**
    1. LR model functions
-   
+
+- **(10/07/2025) goals of the week:**
+   1. Analzying LR together
