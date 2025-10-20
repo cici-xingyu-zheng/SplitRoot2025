@@ -139,3 +139,7 @@ Next, we will analyze the tabulated output of many samples in one experiment:
 
 - **(10/07/2025) goals of the week:**
    1. Analzying LR together
+
+- **(10/20/2025) goals of the week:**
+   1. work on lmm model 
+   2. for primary: we used to fit a piece-wise linear function -- which also means that we need to be aware of the later timepoint's averaging result, whether to use them or not
