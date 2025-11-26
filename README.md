@@ -143,3 +143,8 @@ Next, we will analyze the tabulated output of many samples in one experiment:
 - **(10/20/2025) goals of the week:**
    1. work on lmm model 
    2. for primary: we used to fit a piece-wise linear function -- which also means that we need to be aware of the later timepoint's averaging result, whether to use them or not
+
+- **(11/26/2025) goals of the week:**
+   1. converge on how to use the lmm model -- need to review Cannelle's notebooks (CI bar: is it the same over time theoratically?)
+   2. added the hr primary hitting the bottom
+   3. yet need to look into LRs
